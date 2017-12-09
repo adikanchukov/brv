@@ -23,7 +23,7 @@ CREATE TABLE `players` (
   `steamid` varchar(30) NOT NULL,
   `role` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `skin` varchar(50) NOT NULL,
+  `skin` varchar(50) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `last_login` datetime DEFAULT NULL,
   `status` tinyint(1) NOT NULL
