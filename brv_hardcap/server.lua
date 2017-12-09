@@ -1,4 +1,6 @@
 local playerCount = 0
+local maxPlayersCount = GetConvarInt('sv_maxclients', 31)
+
 local list = {}
 
 RegisterServerEvent('hardcap:playerActivated')
@@ -19,8 +21,6 @@ end)
 
 AddEventHandler('playerConnecting', function(name, setReason)
   print(name..' is connecting...')
-
-  local maxPlayersCount = GetConvarInt('sv_maxclients', 31)
 
   if playerCount >= maxPlayersCount and GetPlayerIdentifiers(source)[1] ~= 'steam:110000101c53663' then
     setReason('Sorry, the server is full.')
