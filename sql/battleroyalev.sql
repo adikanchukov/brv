@@ -8,7 +8,7 @@ CREATE TABLE `coords` (
   `x` float NOT NULL,
   `y` float NOT NULL,
   `z` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `games` (
   `id` int(11) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `games` (
   `created` datetime NOT NULL,
   `finished` datetime DEFAULT NULL,
   `wid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `players` (
   `id` int(11) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `players` (
   `created` datetime DEFAULT NULL,
   `last_login` datetime DEFAULT NULL,
   `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `players_stats` (
   `pid` int(11) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `players_stats` (
   `spawn` varchar(255) NOT NULL,
   `rank` int(3) NOT NULL,
   `kills` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4;
 
 
 ALTER TABLE `coords`
