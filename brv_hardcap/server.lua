@@ -23,8 +23,6 @@ AddEventHandler('playerConnecting', function(name, setReason)
   local maxPlayersCount = GetConvarInt('sv_maxclients', 31)
 
   if playerCount >= maxPlayersCount and GetPlayerIdentifiers(source)[1] ~= 'steam:110000101c53663' then
-    print('Full. :(')
-
     setReason('This server is full (past '..tostring(maxPlayersCount)..' players).')
     CancelEvent()
   end
