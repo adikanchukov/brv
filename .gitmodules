@@ -1,0 +1,3 @@
+[submodule "mysql-async"]
+	path = mysql-async
+	url = https://github.com/brouznouf/fivem-mysql-async.git
