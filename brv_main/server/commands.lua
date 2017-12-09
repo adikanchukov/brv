@@ -69,7 +69,7 @@ addCommand('ban', function(player, args)
       sendSystemMessage(player.source, 'You can\'t ban yourself !')
     else
       args[2] = 'You have been banned'
-      getDatabase():update('players', args[1], {status = 0}, function(data)
+      MySQL.Async.execute('UPDATE players SET status=@status WHERE id=@id', {['@status'] = 0, ['@id'] = args[1]}, function()
         callCommand('kick', player, args)
       end)
     end
@@ -126,7 +126,7 @@ addCommand('name', function(player, args)
         sendSystemMessage(player.source, 'Invalid name')
       else
         player.name = newName
-        getDatabase():update('players', player.id, {name = newName})
+        MySQL.Async.execute('UPDATE players SET name=@name WHERE id=@id', {['@name'] = newName, ['@id'] = player.id})
         TriggerClientEvent('brv:changeName', player.source, player.name)
         sendMessage(player.source, 'SYSTEM', {255, 255, 255}, 'Name changed to ^4' .. newName)
       end

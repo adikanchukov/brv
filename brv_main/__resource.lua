@@ -9,13 +9,14 @@ description 'Battle Royale V'
   -- 'br_spawner', -- DO NOT PUT A MAP RESOURCE HERE
 -- } ]]
 
+server_script '@mysql-async/lib/MySQL.lua'
+
 server_scripts {
   'server/config.lua',
   'lib/locations.lua',
   'lib/weapons.lua',
   'lib/functions_shared.lua',
   'lib/functions_server.lua',
-  'classes/database.lua',
   'classes/player.lua',
   'server/commands.lua',
   'server/server.lua',

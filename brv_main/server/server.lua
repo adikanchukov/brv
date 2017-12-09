@@ -7,7 +7,6 @@
 --                                 Variables                                  --
 --------------------------------------------------------------------------------
 
-local db = Database
 local players = {}
 local safeZonesCoords = {}
 local isGameStarted = false
@@ -54,15 +53,14 @@ function loadPlayer(source)
   if players[source] == nil then
     local steamId = GetPlayerIdentifiers(source)[1]
 
-    db:read('players', '', {'steamid,eq,' .. steamId}, '', function(data) -- , 'status,eq,1'
-      if #data == 1 then
-        local row = data[1]
-        if row.status == 0 then
+    MySQL.Async.fetchScalar('SELECT * FROM players WHERE steamid=@steamid LIMIT 1', {['@steamid'] = steamId}, function(player) -- , 'status,eq,1'
+      if player ~= nil then
+        if player.status == 0 then
           print('Dropping player, banned : ' .. steamId .. ' (' .. source .. ')')
           TriggerEvent('brv:dropPlayer', source, 'You\'re banned !')
           return
         end
-        players[source] = Player.new(row.id, steamId, row.name, row.role, row.skin, source)
+        players[source] = Player.new(player.id, steamId, player.name, player.role, player.skin, source)
         -- TODO : Put this in the Player class
         players[source].rank = 0
         players[source].kills = 0
@@ -71,7 +69,7 @@ function loadPlayer(source)
         players[source].voted = false
 
         TriggerEvent('brv:playerLoaded', source, players[source])
-        db:update('players', row.id, { last_login = os.date(sqlDateFormat) })
+        MySQL.Async.execute('UPDATE players SET last_login=@last_login WHERE id=@id', {['@last_login'] = os.date(sqlDateFormat), ['@id'] = player.id})
       else
         if conf.whitelist then
           print('Dropping player, not in whitelist : ' .. steamId .. ' (' .. source .. ')')
@@ -79,26 +77,22 @@ function loadPlayer(source)
           return
         else
           -- Insert data in DB and load player
-          db:create('players', {steamid = steamId, role = 'player', name = GetPlayerName(source), created = os.date(sqlDateFormat), last_login = os.date(sqlDateFormat), status = 1}, function(id)
-            players[source] = Player.new(id, steamId, GetPlayerName(source), 'player', '', source)
-            players[source].rank = 0
-            players[source].kills = 0
-            players[source].spawn = {}
-            players[source].weapon = ''
-            players[source].voted = false
+          MySQL.Async.execute('INSERT INTO players (steamid, role, name, created, last_login, status) VALUES (@steamid, @role, @name, @created, @last_login, @status)',
+            {['@steamid'] = steamId, ['@role'] = 'player', ['@name'] = GetPlayerName(source), ['@created'] = os.date(sqlDateFormat), ['@last_login'] = os.date(sqlDateFormat), ['@status'] = 1}, function(id)
+              players[source] = Player.new(id, steamId, GetPlayerName(source), 'player', '', source)
+              players[source].rank = 0
+              players[source].kills = 0
+              players[source].spawn = {}
+              players[source].weapon = ''
+              players[source].voted = false
 
-            TriggerEvent('brv:playerLoaded', source, players[source])
+              TriggerEvent('brv:playerLoaded', source, players[source])
           end)
         end
       end
 
     end)
   end
-end
-
--- Expose DB object
-function getDatabase()
-  return db
 end
 
 -- Expose all connected players
@@ -214,7 +208,7 @@ AddEventHandler('brv:playerFirstSpawned', function()
 end)
 
 AddEventHandler('brv:saveCoords', function(coords)
-  db:create('coords', {x = coords.x, y = coords.y, z = coords.z}, function() end)
+  MySQL.Async.execute('INSERT INTO coords (x, y, z) VALUES (@x, @y, @z)', {['@x'] = coords.x, ['@y'] = coords.y, ['@z'] = coords.z})
 end)
 
 AddEventHandler('brv:getPlayerData', function(source, event, data)
@@ -286,7 +280,7 @@ end)
 
 AddEventHandler('brv:saveSkin', function()
   local player = getPlayer(source)
-  getDatabase():update('players', player.id, {skin = player.skin}, function(data)
+  MySQL.Async.execute('UPDATE players SET skin=@skin WHERE id=@id', {['@skin'] = player.skin, ['@id'] = player.id}, function()
     sendSystemMessage(player.source, 'Skin saved (^4' .. player.skin .. '^2)')
   end)
 end)
@@ -361,7 +355,7 @@ AddEventHandler('brv:startGame', function()
   -- Insert data in DB
   safeZonesJSON = json.encode(safeZonesCoords)
 
-  db:create('games', {safezones = safeZonesJSON, created = os.date(sqlDateFormat)}, function(id)
+  MySQL.Async.execute('INSERT INTO games (safezones, created) VALUES (@safezones, @created)', {['@safezones'] = safeZonesJSON, ['@created'] = os.date(sqlDateFormat)}, function(id)
     gameId = id
   end)
 
@@ -403,15 +397,16 @@ AddEventHandler('brv:stopGame', function(restart, noWin)
   if conf.stats then
     for k,player in pairs(players) do
       if player.weapon ~= '' then
-        db:create('players_stats', { pid = player.id, gid = gameId, spawn = json.encode(player.spawn), weapon = player.weapon, kills = player.kills, rank = player.rank}, function()
-          print('Players stats saved')
+        MySQL.Async.execute('INSERT INTO players_stats (pid, gid, spawn, weapon, kills, rank) VALUES (@pid, @gid, @spawn, @weapon, @kills, @rank)',
+          {['@pid'] = player.id, ['@gid'] = gameId, ['@spawn'] = json.encode(player.spawn), ['@weapon'] = player.weapon, ['@kills'] = player.kills, ['@rank'] = player.rank}, function()
+            print('Players stats saved')
         end)
       end
     end
   end
   -- Update database
   isGameStarted = false
-  db:update('games', gameId, {finished = os.date(sqlDateFormat), wid = winner.id}, function()
+  MySQL.Async.execute('UPDATE games SET finised=@finished, wid=@wid WHERE id=@id', {['@finished'] = os.date(sqlDateFormat), ['@wid'] = winner.id, ['@id'] = gameId}, function()
     -- Send the event to the clients with the winner name
     if winner.id ~= 0 then
       TriggerClientEvent('brv:winnerScreen', winner.source, winner.rank, winner.kills, restart)
