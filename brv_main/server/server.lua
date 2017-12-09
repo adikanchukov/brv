@@ -53,7 +53,8 @@ function loadPlayer(source)
   if players[source] == nil then
     local steamId = GetPlayerIdentifiers(source)[1]
 
-    MySQL.Async.fetchScalar('SELECT * FROM players WHERE steamid=@steamid LIMIT 1', {['@steamid'] = steamId}, function(player) -- , 'status,eq,1'
+    MySQL.Async.fetchAll('SELECT * FROM players WHERE steamid=@steamid LIMIT 1', {['@steamid'] = steamId}, function(players) -- , 'status,eq,1'
+      local player = players[1]
       if player ~= nil then
         if player.status == 0 then
           print('Dropping player, banned : ' .. steamId .. ' (' .. source .. ')')
