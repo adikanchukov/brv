@@ -18,7 +18,7 @@ AddEventHandler('playerDropped', function()
 end)
 
 AddEventHandler('playerConnecting', function(name, setReason)
-  print('Connecting: ' .. name)
+  print(name..' is connecting...')
 
   if playerCount >= 23 and GetPlayerIdentifiers(source)[1] ~= 'steam:110000101c53663' then
     print('Full. :(')
