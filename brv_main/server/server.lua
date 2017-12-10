@@ -244,14 +244,9 @@ AddEventHandler('brv:showScoreboard', function()
     }
   end
 
-  local safeSource = source
-  PerformHttpRequest(conf.stats_url,  function(err, text, headers)
-    if text then
-      globalData = json.decode(text)
-      TriggerClientEvent('brv:showScoreboard', safeSource, {players = playersData, global = globalData, lastUpdated = headers['Last-Modified']})
-    end
-  end, 'GET', '')
-
+  MySQL.Async.fetchAll('SELECT players.name, SUM(players_stats.kills) AS \'kills\', COUNT(players_stats.gid) AS \'games\', game_stats.wins FROM players, players_stats, ( SELECT players.id AS id, COUNT(games.wid) AS wins FROM players, games WHERE players.id = games.wid GROUP BY players.id) AS game_stats WHERE players.id = players_stats.pid AND players.id = game_stats.id GROUP BY players.id ORDER BY wins DESC, kills DESC, games DESC LIMIT 10;', { }, function(globalData)
+    TriggerClientEvent('brv:showScoreboard', source, {players = playersData, global = globalData})
+      end)
 end)
 
 AddEventHandler('brv:playerLoaded', function(source, player)
