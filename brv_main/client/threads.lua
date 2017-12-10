@@ -72,7 +72,7 @@ Citizen.CreateThread(function()
       h = '0' .. h
     end
     showText(h .. 'H' .. m, 0.005, 0.05)
-    showText('http://discord.gg/576hXyw', 0.45, 0.015, conf.color.green, 4)
+    showText(conf.discordUrl, 0.45, 0.015, conf.color.green, 4)
 
     if getIsGameStarted() then
       message = 'Players remaining : ' .. getPlayersRemaining()

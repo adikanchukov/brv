@@ -1,4 +1,5 @@
 conf = {
+  discordUrl = '',
   debug = false,
   color = {
     red = { r = 214, g = 62, b = 82 },
