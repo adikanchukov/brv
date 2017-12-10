@@ -279,7 +279,7 @@ AddEventHandler('brv:skinChanged', function(newSkin)
   player.skin = newSkin
 end)
 
-AddEventHandler('brv:saveSkin', function()
+AddEventHandler('brv:saveSkin', function(source)
   local player = getPlayer(source)
   MySQL.Async.execute('UPDATE players SET skin=@skin WHERE id=@id', {['@skin'] = player.skin, ['@id'] = player.id}, function()
     sendSystemMessage(player.source, 'Skin saved (^4' .. player.skin .. '^2)')

@@ -96,7 +96,7 @@ addCommand('saveskin', function(player, args)
   if getIsGameStarted() then
     sendSystemMessage(player.source, 'You can\'t save your skin during the Battle')
   else
-    TriggerEvent('brv:saveSkin')
+    TriggerEvent('brv:saveSkin', player.source)
   end
   return true
 end)
