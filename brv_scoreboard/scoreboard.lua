@@ -41,7 +41,7 @@ AddEventHandler('brv:showScoreboard', function(data)
       for k, player in pairs(global) do
         if i > 10 then break end
         table.insert(gtable,
-          '<tr class=""><td>' .. player.name .. '</td><td>' .. player.games .. '</td><td>' .. player.wins .. '</td><td>' .. player.kills .. '</td></tr>'
+          '<tr class=""><td>' .. player.name .. '</td><td>' .. player.wins .. '</td><td>' .. player.kills .. '</td><td>' .. player.games .. '</td></tr>'
         )
         i = i + 1
       end

@@ -12,7 +12,7 @@ $(function() {
     buf.find('table').append(item.text);
 
     var buf = $('#global');
-    buf.find('table').append('<tr class="heading"><th>Name</th><th>Games</th><th>Wins</th><th>Kills</th></tr>');
+    buf.find('table').append('<tr class="heading"><th>Name</th><th>Wins</th><th>Kills</th><th>Games</th></tr>');
     buf.find('table').append(item.global);
     $('#wrap, #global').fadeToggle('fast');
   }, false);
