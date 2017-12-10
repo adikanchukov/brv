@@ -38,7 +38,7 @@ AddEventHandler('brv:showScoreboard', function(data)
 
       local gtable = {}
       i = 1
-      for k, player in pairs(global) do --spairs(global, function(t,a,b) return t[b].wins < t[a].wins end) do
+      for k, player in pairs(global) do
         if i > 10 then break end
         table.insert(gtable,
           '<tr class=""><td>' .. player.name .. '</td><td>' .. player.games .. '</td><td>' .. player.wins .. '</td><td>' .. player.kills .. '</td></tr>'
@@ -46,7 +46,7 @@ AddEventHandler('brv:showScoreboard', function(data)
         i = i + 1
       end
 
-      SendNUIMessage({ text = table.concat(ptable), global = table.concat(gtable), lastUpdated = data.lastUpdated })
+      SendNUIMessage({ text = table.concat(ptable), global = table.concat(gtable) })
 
       listOn = true
       while listOn do

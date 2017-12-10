@@ -14,15 +14,6 @@ $(function() {
     var buf = $('#global');
     buf.find('table').append('<tr class="heading"><th>Name</th><th>Games</th><th>Wins</th><th>Kills</th></tr>');
     buf.find('table').append(item.global);
-    var d = new Date(item.lastUpdated);
-    var updated = d.toLocaleDateString('en-GB', {
-      day : 'numeric',
-      month : 'short',
-      year : 'numeric',
-      hour : 'numeric',
-      minute : 'numeric'
-    })
-    $('#last-updated').html(updated);
     $('#wrap, #global').fadeToggle('fast');
   }, false);
 });
