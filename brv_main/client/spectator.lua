@@ -92,7 +92,7 @@ Citizen.CreateThread(function()
         DrawMarker(1, tvCoords.x, tvCoords.y, tvCoords.z-1, 0, 0, 0, 0, 0, 0, 5.0, 5.0, 1.06, 6, 62, 145, 100, 0, 0, 0, 0)
         if isPlayerNearCoords(tvCoords, 2.5) then
           inTVZone = true
-          showHelp('Press ~INPUT_ENTER~ to spectate')
+          showHelp('Tap ~INPUT_ENTER~ to enter Spectator Mode')
         else
           inTVZone = false
         end
@@ -145,7 +145,7 @@ Citizen.CreateThread(function()
         if alivePlayers[index] ~= nil then
           -- Disable the radar and display some info
           DisplayRadar(false)
-          showHelp('Press ~INPUT_FRONTEND_LEFT~ or ~INPUT_FRONTEND_RIGHT~ to switch between players')
+          showHelp('Use ~INPUT_FRONTEND_LEFT~ or ~INPUT_FRONTEND_RIGHT~ to switch between players')
           showText('Spectating ' .. alivePlayers[index].name, 0.45, 0.05, conf.color.green)
           showText('Health : ' .. tostring(GetEntityHealth(playerToSpec) - 100), 0.45, 0.08, conf.color.green)
         else
