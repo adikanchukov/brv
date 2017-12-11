@@ -147,7 +147,7 @@ Citizen.CreateThread(function()
           DisplayRadar(false)
           showHelp('Use ~INPUT_FRONTEND_LEFT~ or ~INPUT_FRONTEND_RIGHT~ to switch between players')
           showText('Spectating ' .. alivePlayers[index].name, 0.45, 0.05, conf.color.green)
-          showText('Health : ' .. tostring(GetEntityHealth(playerToSpec) - 100), 0.45, 0.08, conf.color.green)
+          showText('Health : ' .. tostring(GetEntityHealth(GetPlayerPed(playerToSpec))), 0.45, 0.08, conf.color.green)
         else
           if #alivePlayers > 0 then
             -- Current spectated player isn't there anymore, but there are still players to spectate
