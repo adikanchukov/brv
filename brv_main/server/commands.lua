@@ -105,7 +105,7 @@ end)
 -- Vote for the game to start
 addCommand('vote', function(player, args)
   if getIsGameStarted() then
-    sendSystemMessage(player.source, 'You can\'t vote during the Battle')
+    sendSystemMessage(player.source, 'You can\'t vote during the battle')
   else
     TriggerEvent('brv:voteServer', player.source)
   end
@@ -240,18 +240,18 @@ end)
 -- /help
 -- Displays a welcome message
 addCommand('help', function(player, args)
-  sendSystemMessage(player.source, "Welcome to ^8Battle Royale V^2 (^4alpha version^2) !")
-  sendSystemMessage(player.source, "List of commands :")
-  sendSystemMessage(player.source, "^4/help^2 : Prints this message")
-  sendSystemMessage(player.source, "^4/skin^2 : Change your skin (random)")
-  sendSystemMessage(player.source, "^4/saveskin^2 : Saves your current skin")
-  sendSystemMessage(player.source, "^4/name NEWNAME^2 : Sets your name to NEWNAME")
-  sendSystemMessage(player.source, "^4/vote^2 : Vote if you don't want to wait for more players")
-  sendSystemMessage(player.source, "List of shortcuts :")
-  sendSystemMessage(player.source, "^4\"ARROW UP\"^2 : Show the scoreboard")
-  sendSystemMessage(player.source, "^4\"F\"^2 : Spectate (^4lobby only, near the TV^2)")
-  sendSystemMessage(player.source, "^4\"Z\"^2 : Toggle the extended minimap")
-  sendSystemMessage(player.source, "Thanks for playing !")
+  sendSystemMessage(player.source, "^2Welcome to ^8Battle Royale V Reborn^2 ^4ALPHA^2 !")
+  sendSystemMessage(player.source, "^2Available commands :")
+  sendSystemMessage(player.source, "^4/help^2 : Show this message")
+  sendSystemMessage(player.source, "^4/skin^2 : Select new random skin")
+  sendSystemMessage(player.source, "^4/saveskin^2 : Save current skin")
+  sendSystemMessage(player.source, "^4/name NEWNAME^2 : Change name to NEWNAME")
+  sendSystemMessage(player.source, "^4/vote^2 : Vote to start the game immediately")
+  sendSystemMessage(player.source, "^2Key controls :")
+  sendSystemMessage(player.source, "^4\"ARROW UP (HOLD)\"^2 : Display Scoreboard")
+  sendSystemMessage(player.source, "^4\"F\"^2 : Enable Spectator Mode near TV in lobby")
+  sendSystemMessage(player.source, "^4\"Z\"^2 : Toggle Extended Radar")
+  sendSystemMessage(player.source, "^2Join our Discord and thanks for playing !")
   return true
 end)
 
