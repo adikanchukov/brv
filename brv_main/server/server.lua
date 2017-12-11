@@ -207,7 +207,6 @@ end
 AddEventHandler('brv:playerFirstSpawned', function()
   print('brv:playerFirstSpawned : ' .. source)
   loadPlayer(source)
-  sendNotificationDetails(source, 'CHAR_ALL_PLAYERS_CONF', 'Battle Royale V', 'beta version', 'Welcome to the ~r~Battle Royale V~s~ !~n~Type ~b~/help~s~ for a list of commands.')
 end)
 
 AddEventHandler('brv:saveCoords', function(coords)
@@ -254,6 +253,7 @@ end)
 AddEventHandler('brv:playerLoaded', function(source, player)
   TriggerClientEvent('brv:playerLoaded', source, {id = player.id, name = player.name, skin = player.skin, source = player.source})
   sendSystemMessage(-1, player.name .. ' joined.')
+  TriggerEvent('chatMessage', source, player.name, '/help')
 
   if not isGameStarted then
     local nbPlayers = count(players)
