@@ -20,7 +20,7 @@ CREATE TABLE `games` (
 
 CREATE TABLE `players` (
   `id` int(11) NOT NULL,
-  `steamid` varchar(30) NOT NULL,
+  `steamid` varchar(50) NOT NULL,
   `role` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `skin` varchar(50) DEFAULT NULL,
