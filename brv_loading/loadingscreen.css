@@ -55,6 +55,15 @@ h2 {
   top: 10px;
 }
 
+h3 {
+  font-size: 18px;
+  background: transparent;
+  z-index: 0;
+  display: inline-block;
+  color: #E70000;
+  margin-top: 16px;
+}
+
 
 .letni
 {
