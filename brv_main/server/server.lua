@@ -402,7 +402,7 @@ AddEventHandler('brv:stopGame', function(restart, noWin)
   end
   -- Update database
   isGameStarted = false
-  MySQL.Async.execute('UPDATE games SET finised=@finished, wid=@wid WHERE id=@id', {['@finished'] = os.date(sqlDateFormat), ['@wid'] = winner.id, ['@id'] = gameId}, function()
+  MySQL.Async.execute('UPDATE games SET finished=@finished, wid=@wid WHERE id=@id', {['@finished'] = os.date(sqlDateFormat), ['@wid'] = winner.id, ['@id'] = gameId}, function()
     -- Send the event to the clients with the winner name
     if winner.id ~= 0 then
       TriggerClientEvent('brv:winnerScreen', winner.source, winner.rank, winner.kills, restart)
