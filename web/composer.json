@@ -1,5 +1,0 @@
-{
-    "require": {
-        "tcdent/php-restclient": "^0.1.6"
-    }
-}
