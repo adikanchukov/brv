@@ -111,28 +111,31 @@ $(function()
             return;
         }
 
-        // TODO: use some templating stuff for this
-        var colorR = parseInt(item.color[0]);
-        var colorG = parseInt(item.color[1]);
-        var colorB = parseInt(item.color[2]);
-
-        var name = item.name.replace('<', '&lt;');
-        var message = item.message.replace('<', '&lt;');
-
-        name = colorize(name);
-        message = colorize(message);
-
-        var buf = $('#chatBuffer');
-
-        var nameStr = '';
-
-        if (name != '')
+        if (item.message)
         {
-            nameStr = '<strong style="color: rgb(' + colorR + ', ' + colorG + ', ' + colorB + ')">' + name + ': </strong>';
-        }
+            // TODO: use some templating stuff for this
+            var colorR = parseInt(item.color[0]);
+            var colorG = parseInt(item.color[1]);
+            var colorB = parseInt(item.color[2]);
 
-        buf.find('ul').append('<li><span class="name">' + nameStr + '</span><span class="message">' + message + '</span></li>');
-        buf.scrollTop(buf[0].scrollHeight - buf.height());
+            var name = item.name.replace('<', '&lt;');
+            var message = item.message.replace('<', '&lt;');
+
+            name = colorize(name);
+            message = colorize(message);
+
+            var buf = $('#chatBuffer');
+
+            var nameStr = '';
+
+            if (name != '')
+            {
+                nameStr = '<strong style="color: rgb(' + colorR + ', ' + colorG + ', ' + colorB + ')">' + name + ': </strong>';
+            }
+
+            buf.find('ul').append('<li><span class="name">' + nameStr + '</span><span class="message">' + message + '</span></li>');
+            buf.scrollTop(buf[0].scrollHeight - buf.height());
+        }
 
         $('#chat').stop().css('opacity', '1');
 
