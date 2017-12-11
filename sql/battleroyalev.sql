@@ -15,7 +15,7 @@ CREATE TABLE `games` (
   `safezones` text NOT NULL,
   `created` datetime NOT NULL,
   `finished` datetime DEFAULT NULL,
-  `wid` int(11) NOT NULL
+  `wid` int(11) DEFAULT NULL
 ) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `players` (
@@ -58,9 +58,9 @@ ALTER TABLE `players_stats`
 ALTER TABLE `coords`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `players`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `games`
   ADD CONSTRAINT `FK_WID` FOREIGN KEY (`wid`) REFERENCES `players` (`id`);
