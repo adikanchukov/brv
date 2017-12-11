@@ -79,15 +79,17 @@ function loadPlayer(source)
         else
           -- Insert data in DB and load player
           MySQL.Async.execute('INSERT INTO players (steamid, role, name, created, last_login, status) VALUES (@steamid, @role, @name, @created, @last_login, @status)',
-            {['@steamid'] = steamId, ['@role'] = 'player', ['@name'] = GetPlayerName(source), ['@created'] = os.date(sqlDateFormat), ['@last_login'] = os.date(sqlDateFormat), ['@status'] = 1}, function(id)
-              players[source] = Player.new(id, steamId, GetPlayerName(source), 'player', '', source)
-              players[source].rank = 0
-              players[source].kills = 0
-              players[source].spawn = {}
-              players[source].weapon = ''
-              players[source].voted = false
+            {['@steamid'] = steamId, ['@role'] = 'player', ['@name'] = GetPlayerName(source), ['@created'] = os.date(sqlDateFormat), ['@last_login'] = os.date(sqlDateFormat), ['@status'] = 1}, function()
+              MySQL.Async.fetchScalar('SELECT id FROM players WHERE steamid=@steamid', {['@steamid'] = steamId}, function(id)
+                players[source] = Player.new(id, steamId, GetPlayerName(source), 'player', '', source)
+                players[source].rank = 0
+                players[source].kills = 0
+                players[source].spawn = {}
+                players[source].weapon = ''
+                players[source].voted = false
 
-              TriggerEvent('brv:playerLoaded', source, players[source])
+                TriggerEvent('brv:playerLoaded', source, players[source])
+              end)
           end)
         end
       end
@@ -351,8 +353,10 @@ AddEventHandler('brv:startGame', function()
   -- Insert data in DB
   safeZonesJSON = json.encode(safeZonesCoords)
 
-  MySQL.Async.execute('INSERT INTO games (safezones, created) VALUES (@safezones, @created)', {['@safezones'] = safeZonesJSON, ['@created'] = os.date(sqlDateFormat)}, function(id)
-    gameId = id
+  MySQL.Async.execute('INSERT INTO games (safezones, created) VALUES (@safezones, @created)', {['@safezones'] = safeZonesJSON, ['@created'] = os.date(sqlDateFormat)}, function()
+    MySQL.Async.fetchScalar('SELECT MAX(id) FROM games', { }, function(id) --TODO Ugly stuff
+      gameId = id
+    end)
   end)
 
   local seed = math.random()
