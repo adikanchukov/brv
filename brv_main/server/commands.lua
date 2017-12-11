@@ -240,7 +240,7 @@ end)
 -- /help
 -- Displays a welcome message
 addCommand('help', function(player, args)
-  sendSystemMessage(player.source, "Welcome to ^8Battle Royale V^2 (^4beta version^2) !")
+  sendSystemMessage(player.source, "Welcome to ^8Battle Royale V^2 (^4alpha version^2) !")
   sendSystemMessage(player.source, "List of commands :")
   sendSystemMessage(player.source, "^4/help^2 : Prints this message")
   sendSystemMessage(player.source, "^4/skin^2 : Change your skin (random)")
