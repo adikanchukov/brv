@@ -175,8 +175,13 @@ end)
 
 AddEventHandler('brv:playerLoaded', function(playerData)
   player = playerData
-  -- Set initial random skin
-  player.skin = changeSkin(player.skin)
+
+  if not player.skin then
+    TriggerEvent('brv:changeSkin')
+    TriggerServerEvent('brv:saveSkin', player.source)
+  else
+    player.skin = changeSkin(player.skin)
+  end
 end)
 
 -- Change player name
