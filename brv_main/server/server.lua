@@ -389,7 +389,7 @@ AddEventHandler('brv:stopGame', function(restart, noWin)
   end
   -- Get the winner
   local alivePlayers = getAlivePlayers()
-  local winner = { id = 0, name = 'no one' }
+  local winner = { id = nil, name = 'no one' }
   if not noWin and count(alivePlayers) == 1 then
     winner = alivePlayers[1]
     winner.rank = 1
@@ -408,7 +408,7 @@ AddEventHandler('brv:stopGame', function(restart, noWin)
   isGameStarted = false
   MySQL.Async.execute('UPDATE games SET finished=@finished, wid=@wid WHERE id=@id', {['@finished'] = os.date(sqlDateFormat), ['@wid'] = winner.id, ['@id'] = gameId}, function()
     -- Send the event to the clients with the winner name
-    if winner.id ~= 0 then
+    if winner.id then
       TriggerClientEvent('brv:winnerScreen', winner.source, winner.rank, winner.kills, restart)
     else
       TriggerClientEvent('brv:stopGame', -1, winner.name, restart)
