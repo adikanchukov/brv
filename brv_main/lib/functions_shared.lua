@@ -17,17 +17,6 @@ function explode(str, sep)
   return arr
 end
 
-function table_debug(array)
-  if type(array) ~= 'table' then return false end
-
-  local printFunction = Citizen and Citizen.Trace or print
-  printFunction('TABLE.DEBUG START')
-  for k, v in pairs(array) do
-    printFunction(k .. ' : ' .. v)
-  end
-  printFunction('TABLE.DEBUG END')
-end
-
 function table_reverse(t)
     local reversedTable = {}
     local itemCount = #t
@@ -45,14 +34,4 @@ function count(array)
     count = count + 1
   end
   return count
-end
-
-function in_array(tab, val)
-  for index, value in pairs(tab) do
-    if value == val then
-      return true
-    end
-  end
-
-  return false
 end

@@ -3,18 +3,6 @@
 --                            Client functions file                           --
 --------------------------------------------------------------------------------
 
-function GetPlayers()
-  local players = {}
-
-  for i = 0, 31 do
-    if NetworkIsPlayerActive(i) then
-      table.insert(players, i)
-    end
-  end
-
-  return players
-end
-
 -- Prints help text (top left)
 function showHelp(str)
   SetTextComponentFormat("STRING")
@@ -61,13 +49,6 @@ end
 function getGroundZ(x, y, z)
   local result, groundZ = GetGroundZFor_3dCoord(x+0.0, y+0.0, z+0.0, Citizen.ReturnResultAnyway())
   return groundZ
-end
-
--- Get the current ped weapon equipped
-function getPedWeapon(ped)
-  local int
-  pedWeapon = Citizen.InvokeNative(0x3A87E44BB9A01D54, ped, Citizen.PointerValueIntInitialized(int), 0)
-  return pedWeapon
 end
 
 -- Teleports current player to coords
