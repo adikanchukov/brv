@@ -1,4 +1,4 @@
--- DOT NOT USE THE resource_manifest_version
+resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
 resource_type 'gametype' { name = 'Battle Royale V' }
 
@@ -32,6 +32,7 @@ client_scripts {
   'client/config.lua',
   'lib/npc_models.lua',
   'lib/locations.lua',
+  'lib/items.lua',
   'lib/functions_shared.lua',
   'lib/functions_client.lua',
   'client/spectator.lua',

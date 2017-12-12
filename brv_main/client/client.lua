@@ -18,7 +18,7 @@ local pickupBlips = {} -- All pickup blips
 
 local safeZones = {} -- All safezones
 local safeZonesBlips = {} -- All safezones blips
-local currentSafeZone = 1; -- Current safe zone
+local currentSafeZone = 1 -- Current safe zone
 
 local safeZoneTimer -- Global safe zone timer, default value is in the config file
 local safeZoneTimerDec -- Step of the timer

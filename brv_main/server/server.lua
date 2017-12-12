@@ -362,9 +362,9 @@ AddEventHandler('brv:startGame', function()
 
   -- Create pickups
   local pickupIndexes = { }
-  local pickupCount = count(locations)
+  local pickupCount = count(pickupItems)
 
-  for i = 1, pickupCount do
+  for i = 1, count(locations) do
     table.insert(pickupIndexes, math.random(pickupCount))
   end
 
