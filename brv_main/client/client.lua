@@ -66,6 +66,10 @@ function getPickups()
   return pickups
 end
 
+function getPickupBlips()
+  return pickupBlips
+end
+
 function getPlayersRemaining()
   return nbPlayersRemaining
 end
