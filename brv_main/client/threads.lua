@@ -104,11 +104,10 @@ Citizen.CreateThread(function()
 
     if getIsGameStarted() then
       if NetworkIsPlayerActive(PlayerId()) then
-        for i,v in pairs(getPickups()) do
+        for i,v in pairs(pickups) do
           if HasPickupBeenCollected(v.id) then
             -- Remove local pickup
-            RemovePickup(v.id)
-            deletePickup(i)
+            TriggerEvent('brv:removePickup', i)
             -- Sends event to the server for the other players
             TriggerServerEvent('brv:pickupCollected', i)
           end

@@ -67,10 +67,6 @@ function getPickups()
   return pickups
 end
 
-function deletePickup(i)
-  pickups[i] = nil
-end
-
 function getPlayersRemaining()
   return nbPlayersRemaining
 end
