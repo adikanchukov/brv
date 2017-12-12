@@ -264,12 +264,6 @@ AddEventHandler('brv:createPickups', function(seed)
   Citizen.CreateThread(function()
     local index = 0
     local rand = math.random() * 50000 -- Saves a client sided rand
-    if count(pickups) > 0 then
-      for i, v in pairs(pickups) do
-        RemovePickup(v.id)
-      end
-      pickups = { }
-    end
 
     math.randomseed(seed * 50000)
 
@@ -321,6 +315,11 @@ AddEventHandler('brv:stopGame', function(winnerName, restart)
 
   for _, pickupBlip in pairs(pickupBlips) do
     RemoveBlip(pickupBlip)
+  end
+
+  for k, pickup in pairs(pickups) do
+    RemovePickup(pickup.id)
+    pickups[k] = nil
   end
 
   if restart then
