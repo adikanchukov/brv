@@ -20,7 +20,7 @@ Citizen.CreateThread(function()
       end
     end
 
-    -- Drawing weapons marker
+    -- Drawing pickup markers
     for i,v in pairs(getPickups()) do
       if isPlayerNearCoords(v.coords, 100.0) then
         DrawMarker(1, v.coords.x, v.coords.y, v.coords.z-1, 0, 0, 0, 0, 0, 0, 0.5001, 0.5001, 2.0001, 245, 233, 76, 100, 0, 0, 0, 0)

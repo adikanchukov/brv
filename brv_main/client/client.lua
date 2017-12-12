@@ -14,7 +14,7 @@ local gameEnded = false -- True during restart
 local playerInLobby = true -- Is the player in the lobby ?
 local player = {} -- Local player data
 local pickups = {} -- Local pickups data
-local weaponsBlips = {} -- ALl weapon (pickups) blips
+local pickupBlips = {} -- All pickup blips
 
 local safeZones = {} -- All safezones
 local safeZonesBlips = {} -- All safezones blips
@@ -245,10 +245,10 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   -- Sets all safezones
   safeZones = svSafeZonesCoords
 
-  -- Generates weapon blips
+  -- Generate pickup blips
   for i, location in pairs(locations) do
     if location.x ~= player.spawn.x and location.y ~= player.spawn.y then
-      weaponsBlips[i] = addWeaponBlip(location)
+      pickupBlips[i] = addPickupBlip(location)
     end
   end
 
@@ -323,8 +323,8 @@ AddEventHandler('brv:stopGame', function(winnerName, restart)
     RemoveBlip(safeZoneBlip)
   end
 
-  for _,weaponBlip in pairs(weaponsBlips) do
-    RemoveBlip(weaponBlip)
+  for _, pickupBlip in pairs(pickupBlips) do
+    RemoveBlip(pickupBlip)
   end
 
   if restart then

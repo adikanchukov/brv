@@ -185,7 +185,7 @@ function setSafeZone(safeZoneBlip, safeZone, step, removeBlip)
   return safeZoneBlip
 end
 
-function addWeaponBlip(coords)
+function addPickupBlip(coords)
   local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
   SetBlipSprite(blip, 110)
   SetBlipAsShortRange(blip, true)
