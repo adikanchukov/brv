@@ -85,7 +85,7 @@ Citizen.CreateThread(function()
         showText('THE BATTLE IS CURRENTLY GOING', 0.43, 0.105, conf.color.red)
         showText('You can spectate on TV while waiting for the new Battle', 0.38, 0.14, conf.color.red)
       else
-        showText('You are in Lobby, it is safe and comfortable', 0.42, 0.105, conf.color.green)
+        showText('Type /vote to start the Battle immediately', 0.42, 0.105, conf.color.green)
       end
     end
   end
