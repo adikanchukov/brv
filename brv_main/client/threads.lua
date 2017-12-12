@@ -74,7 +74,7 @@ Citizen.CreateThread(function()
       if getIsGameEnded() then
         message = 'The Battle will start soon...'
       else
-        message = 'Waiting for more players to start the Battle...'
+        message = 'Waiting for '..getPlayersRemainingToAutostart()..' player(s) to start the Battle...'
       end
     end
 

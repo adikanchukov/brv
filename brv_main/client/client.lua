@@ -8,6 +8,7 @@
 --------------------------------------------------------------------------------
 local firstSpawn = true -- Used to trigger a first spawn event to the server and loads the player from DB
 local nbPlayersRemaining = 0 -- Printed top left
+local autostartPlayersRemaining = -1 -- Players remaining to start the Battle
 local alivePlayers = {} -- A table with all alive players, during a game
 local isGameStarted = false -- Is game started ?
 local gameEnded = false -- True during restart
@@ -32,6 +33,7 @@ RegisterNetEvent('brv:playerTeleportationToPlayer') -- Teleportation to another 
 RegisterNetEvent('brv:playerTeleportationToMarker') -- Teleportation to the marker - NOT WORKING
 RegisterNetEvent('brv:updateAlivePlayers') -- Track the remaining players in battle
 RegisterNetEvent('brv:showNotification') -- Shows a basic notification
+RegisterNetEvent('brv:updateRemainingToStartPlayers') -- Update remaining players count to autostart the Battle
 RegisterNetEvent('brv:showNotificationDetails') -- Shows an advanced notification
 RegisterNetEvent('brv:setHealth') -- DEBUG : sets the current health (admin only)
 RegisterNetEvent('brv:changeSkin') -- Change the current skin
@@ -72,6 +74,10 @@ end
 
 function getPlayersRemaining()
   return nbPlayersRemaining
+end
+
+function getPlayersRemainingToAutostart()
+  return autostartPlayersRemaining
 end
 
 function getAlivePlayers()
@@ -165,6 +171,10 @@ end)
 -- Show a notification with details
 AddEventHandler('brv:showNotificationDetails', function(pic, title, subtitle, message)
   showNotificationDetails(pic, title, subtitle, message)
+end)
+
+AddEventHandler('brv:updateRemainingToStartPlayers', function(playersCount)
+  autostartPlayersRemaining = playersCount
 end)
 
 -- Sets current player health

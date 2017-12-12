@@ -260,7 +260,7 @@ AddEventHandler('brv:playerLoaded', function(source, player)
       TriggerClientEvent('brv:restartGame', -1)
     else
       if nbPlayers < conf.autostart then
-        TriggerClientEvent('brv:showNotification', -1, '~r~' .. (conf.autostart - nbPlayers) .. '~s~ more player(s) needed for autostart')
+        TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, conf.autostart - nbPlayers)
       end
     end
   else
