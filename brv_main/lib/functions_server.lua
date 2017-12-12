@@ -11,10 +11,6 @@ function sendNotification(target, message)
   TriggerClientEvent('brv:showNotification', target, message)
 end
 
-function sendNotificationDetails(target, pic, title, subtitle, message)
-  TriggerClientEvent('brv:showNotificationDetails', target, pic, title, subtitle, message)
-end
-
 -- Returns a random location from a predefined list
 function getRandomLocation()
   local nbLocations = count(locations)

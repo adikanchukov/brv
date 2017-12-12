@@ -34,7 +34,6 @@ RegisterNetEvent('brv:playerTeleportationToMarker') -- Teleportation to the mark
 RegisterNetEvent('brv:updateAlivePlayers') -- Track the remaining players in battle
 RegisterNetEvent('brv:showNotification') -- Shows a basic notification
 RegisterNetEvent('brv:updateRemainingToStartPlayers') -- Update remaining players count to autostart the Battle
-RegisterNetEvent('brv:showNotificationDetails') -- Shows an advanced notification
 RegisterNetEvent('brv:setHealth') -- DEBUG : sets the current health (admin only)
 RegisterNetEvent('brv:changeSkin') -- Change the current skin
 RegisterNetEvent('brv:changeName') -- Change the current name
@@ -166,11 +165,6 @@ end)
 -- Show a notification
 AddEventHandler('brv:showNotification', function(message)
   showNotification(message)
-end)
-
--- Show a notification with details
-AddEventHandler('brv:showNotificationDetails', function(pic, title, subtitle, message)
-  showNotificationDetails(pic, title, subtitle, message)
 end)
 
 AddEventHandler('brv:updateRemainingToStartPlayers', function(playersCount)

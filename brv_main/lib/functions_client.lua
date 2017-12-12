@@ -17,14 +17,6 @@ function showNotification(text)
   DrawNotification(true, false)
 end
 
--- Print notification with details
-function showNotificationDetails(pic, title, subtitle, message)
-  SetNotificationTextEntry("STRING")
-  AddTextComponentString(message)
-  SetNotificationMessage(pic, pic, true, 2, title, subtitle)
-  DrawNotification(true, false)
-end
-
 -- Print a text at coords
 function showText(text, x, y, color, font)
   if color == nil then
