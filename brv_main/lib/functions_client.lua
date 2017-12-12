@@ -139,6 +139,10 @@ function getRandomLocation()
   return locations[GetRandomIntInRange(1, count(locations) + 1)]
 end
 
+function getRandomSpawn()
+  return spawns[GetRandomIntInRange(1, count(spawns) + 1)]
+end
+
 -- Sets the current safe zone and draws it on the map
 -- safeZoneBlip (integer)
 -- safeZoneCoords (x, y, z)

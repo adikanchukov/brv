@@ -204,7 +204,7 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
 
   nbPlayersRemaining = nbAlivePlayers
 
-  player.spawn = getRandomLocation()
+  player.spawn = getRandomSpawn()
   player.spawn.z = 1200.0 -- Get high !
 
   local ped = GetPlayerPed(-1)
