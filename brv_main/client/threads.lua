@@ -1,25 +1,25 @@
 Citizen.CreateThread(function()
+  SetRandomSeed(GetNetworkTime())
+
+  -- Disable money displaying
+  DisplayCash(true)
+
+  -- Disable health regeneration
+  SetPlayerHealthRechargeMultiplier(PlayerId(), 0)
+
   local isRadarExtended = false
 
   while true do
-    Wait(0)
+    Citizen.Wait(0)
+
+    -- Extended Radar
+    if IsControlJustReleased(0, 20) then
+      isRadarExtended = not isRadarExtended
+      Citizen.InvokeNative(0x231C8F89D0539D8F, isRadarExtended, false)
+    end
 
     -- Infinite stamina
-    RestorePlayerStamina(PlayerId(), 1.0)
-
-    -- Disable health regeneration
-    SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
-
-    -- Extended minimap
-    if IsControlJustPressed(0, 20) then
-      if not isRadarExtended then
-        SetRadarBigmapEnabled(true, false)
-        isRadarExtended = true
-      else
-        SetRadarBigmapEnabled(false, false)
-        isRadarExtended = false
-      end
-    end
+    ResetPlayerStamina(PlayerId())
   end
 end)
 

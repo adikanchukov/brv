@@ -242,9 +242,7 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
 
   -- Generate pickup blips
   for i, location in pairs(locations) do
-    if location.x ~= player.spawn.x and location.y ~= player.spawn.y then
-      pickupBlips[i] = addPickupBlip(location)
-    end
+    pickupBlips[i] = addPickupBlip(location)
   end
 
   -- Set game state as started
