@@ -309,12 +309,14 @@ AddEventHandler('brv:stopGame', function(winnerName, restart)
     player.skin = changeSkin(player.skin)
   end)
 
-  for _,safeZoneBlip in pairs(safeZonesBlips) do
+  for k, safeZoneBlip in pairs(safeZonesBlips) do
     RemoveBlip(safeZoneBlip)
+    safeZoneBlips[k] = nil
   end
 
-  for _, pickupBlip in pairs(pickupBlips) do
+  for k, pickupBlip in pairs(pickupBlips) do
     RemoveBlip(pickupBlip)
+    pickupBlips[k] = nil
   end
 
   for k, pickup in pairs(pickups) do
