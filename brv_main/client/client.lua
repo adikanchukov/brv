@@ -38,7 +38,6 @@ RegisterNetEvent('brv:changeSkin') -- Change the current skin
 RegisterNetEvent('brv:changeName') -- Change the current name
 RegisterNetEvent('brv:nextSafeZone') -- Triggers the next safe zone, recursive event
 RegisterNetEvent('brv:createPickups') -- Generates all the pickups
-RegisterNetEvent('brv:addPickup') -- Add one pickup, without blip
 RegisterNetEvent('brv:removePickup') -- Remove a pickup
 RegisterNetEvent('brv:wastedScreen') -- WASTED
 RegisterNetEvent('brv:winnerScreen') -- WINNER
@@ -259,32 +258,24 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   })
 end)
 
-AddEventHandler('brv:createPickups', function(seed)
-  -- Generates pickups based on server seed
-  Citizen.CreateThread(function()
-    local index = 0
-    local rand = math.random() * 50000 -- Saves a client sided rand
+-- Create pickups which are the same for each player
+AddEventHandler('brv:createPickups', function(pickupIndexes)
+  for k, v in pairs(pickupIndexes) do
+    local pickupItem = pickupItems[v]
+    local pickupHash = GetHashKey(pickupItem.id)
 
-    math.randomseed(seed * 50000)
+    local weaponHash = GetWeaponHashFromPickup(pickupHash)
+    local amount = 1
 
-    for i, location in pairs(locations) do
-      if location.x ~= player.spawn.x and location.y ~= player.spawn.y then
-        local pickupItem = getRandomPickup()
-        index = tonumber(round(math.random())+1)
-        pickups[i] = {
-          id = CreatePickup(GetHashKey(pickupItem.id), location.x, location.y, location.z),
-          coords = location
-        }
-      end
+    if weaponHash ~= 0 then
+      amount = conf.weaponClipCount * GetWeaponClipSize(weaponHash)
     end
-    math.randomseed(rand)
-  end)
-end)
 
-AddEventHandler('brv:addPickup', function(pickupHash, location)
-  if not IsEntityDead(GetPlayerPed(-1)) then
-    local pickup = CreatePickup(pickupHash, location.x, location.y, location.z)
-    table.insert(pickups, { id = pickup, coords = location })
+    pickups[k] = {
+      id = CreatePickupRotate(pickupHash, locations[k].x, locations[k].y, locations[k].z - 0.4, 0.0, 0.0, 0.0, 512, amount),
+      name = pickupItem.name,
+      coords = locations[k]
+    }
   end
 end)
 

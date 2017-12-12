@@ -358,10 +358,17 @@ AddEventHandler('brv:startGame', function()
     end)
   end)
 
-  local seed = math.random()
-
   TriggerClientEvent('brv:startGame', -1, nbAlivePlayers, safeZonesCoords)
-  TriggerClientEvent('brv:createPickups', -1, seed)
+
+  -- Create pickups
+  local pickupIndexes = { }
+  local pickupCount = count(locations)
+
+  for i = 1, pickupCount do
+    table.insert(pickupIndexes, math.random(pickupCount))
+  end
+
+  TriggerClientEvent('brv:createPickups', -1, pickupIndexes)
 end)
 
 -- Remove a collected pickup to all other players

@@ -134,11 +134,6 @@ function getRandomMeleeWeapon()
   return meleeWeapons[GetRandomIntInRange(1, count(meleeWeapons) + 1)]
 end
 
--- Returns a random pickup item
-function getRandomPickup()
-  return pickupItems[GetRandomIntInRange(1, count(pickupItems) + 1)]
-end
-
 -- Returns a random location from a predefined list
 function getRandomLocation()
   return locations[GetRandomIntInRange(1, count(locations) + 1)]

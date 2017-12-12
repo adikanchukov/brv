@@ -6,6 +6,7 @@ conf = {
     green = { r = 62, g = 214, b = 82 },
     grey = { r = 200, g = 200, b = 200 },
   },
+  weaponClipCount = 3,
   outOfZoneTimer = 30,
   instantDeathTimer = 90,
   safeZoneTimer = 300,

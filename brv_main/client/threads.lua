@@ -1,5 +1,6 @@
 Citizen.CreateThread(function()
   local isRadarExtended = false
+
   while true do
     Wait(0)
 
@@ -17,13 +18,6 @@ Citizen.CreateThread(function()
       else
         SetRadarBigmapEnabled(false, false)
         isRadarExtended = false
-      end
-    end
-
-    -- Drawing pickup markers
-    for i,v in pairs(getPickups()) do
-      if isPlayerNearCoords(v.coords, 100.0) then
-        DrawMarker(1, v.coords.x, v.coords.y, v.coords.z-1, 0, 0, 0, 0, 0, 0, 0.5001, 0.5001, 2.0001, 245, 233, 76, 100, 0, 0, 0, 0)
       end
     end
   end
@@ -104,11 +98,11 @@ Citizen.CreateThread(function()
 
     if getIsGameStarted() then
       if NetworkIsPlayerActive(PlayerId()) then
-        for i,v in pairs(getPickups()) do
-          if HasPickupBeenCollected(v.id) then
-            -- Remove local pickup
+        for i, pickup in pairs(getPickups()) do
+          if HasPickupBeenCollected(pickup.id) then
+            showNotification('Picked up '..pickup.name..)
+
             TriggerEvent('brv:removePickup', i)
-            -- Sends event to the server for the other players
             TriggerServerEvent('brv:pickupCollected', i)
           end
         end
