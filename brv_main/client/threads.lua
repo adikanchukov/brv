@@ -37,7 +37,7 @@ Citizen.CreateThread(function()
       timeDiff = GetTimeDifference(GetGameTimer(), gameEndedAt)
       countdown = conf.autostartTimer - tonumber(round(timeDiff / 1000))
 
-      showText('THE NEXT BATTLE IS STARTING IN ' .. countdown .. 's', 0.425, 0.135, conf.color.red)
+      showText('THE NEXT BATTLE IS STARTING IN ' .. countdown .. 's', 0.43, 0.135, conf.color.red)
 
       if countdown < 0 then
         setGameEnded(false)
@@ -75,6 +75,7 @@ Citizen.CreateThread(function()
         message = 'The Battle will start soon...'
       else
         message = 'Waiting for '..getPlayersRemainingToAutostart()..' player(s) to start the Battle...'
+        showText('Type /vote to start the Battle immediately', 0.42, 0.105, conf.color.green)
       end
     end
 
@@ -82,10 +83,8 @@ Citizen.CreateThread(function()
 
     if isPlayerInLobby() and not isPlayerInSpectatorMode() then
       if getIsGameStarted() then
-        showText('THE BATTLE IS CURRENTLY GOING', 0.43, 0.105, conf.color.red)
-        showText('You can spectate on TV while waiting for the new Battle', 0.38, 0.14, conf.color.red)
-      else
-        showText('Type /vote to start the Battle immediately', 0.42, 0.105, conf.color.green)
+        showText('THE BATTLE IS CURRENTLY GOING', 0.441, 0.105, conf.color.red)
+        showText('You can spectate on TV while waiting for the new Battle', 0.395, 0.14, conf.color.red)
       end
     end
   end
