@@ -166,10 +166,16 @@ function setSafeZone(safeZoneBlip, safeZone, step, removeBlip)
   return safeZoneBlip
 end
 
+-- https://marekkraus.sk/gtav/blips/list.html
 function addPickupBlip(coords)
   local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
-  SetBlipSprite(blip, 110)
+  SetBlipSprite(blip, 66)
+  SetBlipHighDetail(blip, true)
   SetBlipAsShortRange(blip, true)
+
+  BeginTextCommandSetBlipName("STRING")
+  AddTextComponentString("Loot")
+  EndTextCommandSetBlipName(blip)
 
   return blip
 end
