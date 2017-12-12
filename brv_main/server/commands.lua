@@ -105,7 +105,7 @@ end)
 -- Vote for the game to start
 addCommand('vote', function(player, args)
   if getIsGameStarted() then
-    sendSystemMessage(player.source, 'You can\'t vote during the battle')
+    sendSystemMessage(player.source, 'You can\'t vote during the Battle')
   else
     TriggerEvent('brv:voteServer', player.source)
   end

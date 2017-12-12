@@ -65,16 +65,16 @@ Citizen.CreateThread(function()
     if h < 10 then
       h = '0' .. h
     end
-    showText(h .. 'H' .. m, 0.005, 0.05)
+    showText(h .. ':' .. m, 0.005, 0.05)
     showText(conf.discordUrl, 0.45, 0.015, conf.color.green, 4)
 
     if getIsGameStarted() then
       message = 'Players remaining : ' .. getPlayersRemaining()
     else
       if getIsGameEnded() then
-        message = 'The battle will start soon...'
+        message = 'The Battle will start soon...'
       else
-        message = 'Waiting for more players to start the battle...'
+        message = 'Waiting for more players to start the Battle...'
       end
     end
 
@@ -82,10 +82,10 @@ Citizen.CreateThread(function()
 
     if isPlayerInLobby() and not isPlayerInSpectatorMode() then
       if getIsGameStarted() then
-        showText('A BATTLE IS CURRENTLY GOING', 0.43, 0.105, conf.color.red)
-        showText('You can spectate at the TV and wait for a new battle to begin', 0.38, 0.14, conf.color.red)
+        showText('THE BATTLE IS CURRENTLY GOING', 0.43, 0.105, conf.color.red)
+        showText('You can spectate on TV while waiting for the new Battle', 0.38, 0.14, conf.color.red)
       else
-        showText('You are in the lobby, it is safe and comfortable', 0.4, 0.105, conf.color.green)
+        showText('You are in Lobby, it is safe and comfortable', 0.42, 0.105, conf.color.green)
       end
     end
   end
