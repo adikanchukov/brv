@@ -138,21 +138,6 @@ Citizen.CreateThread(function()
       if IsEntityDead(playerPed) then
         if not diedAt then
           diedAt = GetGameTimer()
-          local weaponHash = getPedWeapon(playerPed)
-          -- Citizen.Trace('weaponHash : ' .. weaponHash)
-          if weaponHash then
-            local pickupHash = getPickupHashFromWeapon(weaponHash)
-            if pickupHash then
-              -- Citizen.Trace('pickupHash : ' .. pickupHash)
-              local location = GetEntityCoords(playerPed)
-              local coords = {
-                x = location.x,
-                y = location.y,
-                z = location.z,
-              }
-              TriggerServerEvent('brv:dropWeapon', pickupHash, coords)
-            end
-          end
         end
       else
         diedAt = nil

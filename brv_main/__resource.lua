@@ -14,7 +14,7 @@ server_script '@mysql-async/lib/MySQL.lua'
 server_scripts {
   'server/config.lua',
   'lib/locations.lua',
-  'lib/weapons.lua',
+  'lib/items.lua',
   'lib/functions_shared.lua',
   'lib/functions_server.lua',
   'classes/player.lua',
@@ -31,7 +31,6 @@ export 'drawInstructionalButtons'
 client_scripts {
   'client/config.lua',
   'lib/npc_models.lua',
-  'lib/weapons.lua',
   'lib/locations.lua',
   'lib/functions_shared.lua',
   'lib/functions_client.lua',

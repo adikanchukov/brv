@@ -32,7 +32,6 @@ RegisterServerEvent('brv:dropPlayer')
 RegisterServerEvent('brv:playerLoaded')
 RegisterServerEvent('brv:playerDied')
 RegisterServerEvent('brv:pickupCollected')
-RegisterServerEvent('brv:dropWeapon')
 RegisterServerEvent('brv:skinChanged')
 RegisterServerEvent('brv:saveSkin')
 RegisterServerEvent('brv:vote')
@@ -448,10 +447,6 @@ AddEventHandler('brv:playerDied', function(source, type, killer)
   if not conf.debug and isGameStarted and nbAlivePlayers == 1 and count(players) > 1 then
     TriggerEvent('brv:stopGame', true, false)
   end
-end)
-
-AddEventHandler('brv:dropWeapon', function(pickupHash, location)
-  TriggerClientEvent('brv:addPickup', -1, pickupHash, location)
 end)
 
 AddEventHandler('brv:sendToDiscord', function(name, message)

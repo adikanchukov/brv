@@ -145,43 +145,22 @@ end
 
 -- Returns a random npc model from a predefined list
 function getRandomNPCModel()
-  local nbModels = count(npc_models)
-  local randModelIndex = math.random(nbModels)
-  return npc_models[randModelIndex]
+  return npc_models[GetRandomIntInRange(1, count(npc_models) + 1)]
 end
 
--- Returns a random weapon model from a predefined list
-function getRandomWeapon(type)
-  if weapons[type] == nil then return false end
-
-  local nbWeapons = count(weapons[type])
-  local randWeaponIndex = math.random(nbWeapons)
-  return weapons[type][randWeaponIndex]
+-- Return a random melee starting weapon
+function getRandomMeleeWeapon()
+  return meleeWeapons[GetRandomIntInRange(1, count(meleeWeapons) + 1)]
 end
 
--- Returns the pickup hash equivalent from a weapon hash
--- false if the hash is not found
-function getPickupHashFromWeapon(hash)
-  for k,v in pairs(weapons) do
-    for i,value in pairs(v) do
-      local pickupHash = GetHashKey(value)
-      if pickupHash < 0 then
-        pickupHash = pickupHash +0xFFFFFFFF +1
-      end
-      if pickupHash == hash then
-        return GetHashKey('pickup_' .. value)
-      end
-    end
-  end
-
-  return false
+-- Returns a random pickup item
+function getRandomPickup()
+  return pickupItems[GetRandomIntInRange(1, count(pickupItems) + 1)]
 end
 
 -- Returns a random location from a predefined list
 function getRandomLocation()
-  local nbLocations = count(locations)
-  local randLocationIndex = math.random(nbLocations)
-  return locations[randLocationIndex]
+  return locations[GetRandomIntInRange(1, count(locations) + 1)]
 end
 
 -- Sets the current safe zone and draws it on the map

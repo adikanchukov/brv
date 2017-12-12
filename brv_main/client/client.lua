@@ -214,8 +214,7 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
 
   local ped = GetPlayerPed(-1)
   local parachute = GetHashKey('gadget_parachute')
-  local weapModel = getRandomWeapon('melee')
-  -- Citizen.Trace('You got a ' .. weapModel .. ' !!')
+  local weapModel = getRandomMeleeWeapon()
   local weapon = GetHashKey(weapModel)
 
   -- Remove all previously given weapons
@@ -239,6 +238,9 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   SetCanAttackFriendly(ped, true, false)
   NetworkSetFriendlyFireOption(true)
   -- SetEntityCanBeDamaged(ped, true)
+
+  -- Enable drop weapon after death
+  SetPedDropsWeaponsWhenDead(ped, true)
 
   -- Sets all safezones
   safeZones = svSafeZonesCoords
@@ -264,27 +266,23 @@ end)
 AddEventHandler('brv:createPickups', function(seed)
   -- Generates pickups based on server seed
   Citizen.CreateThread(function()
-    local weapons = {}
-    local weaponModel = ''
     local index = 0
     local rand = math.random() * 50000 -- Saves a client sided rand
     if count(pickups) > 0 then
       for i, v in pairs(pickups) do
         RemovePickup(v.id)
       end
-      pickups = {}
+      pickups = { }
     end
 
     math.randomseed(seed * 50000)
+
     for i, location in pairs(locations) do
       if location.x ~= player.spawn.x and location.y ~= player.spawn.y then
-        weapons = {
-          getRandomWeapon('pistols'),
-          getRandomWeapon('submachines'),
-        }
+        local pickupItem = getRandomPickup()
         index = tonumber(round(math.random())+1)
         pickups[i] = {
-          id = CreatePickup(GetHashKey('pickup_' .. weapons[index]), location.x, location.y, location.z),
+          id = CreatePickup(GetHashKey(pickupItem.id), location.x, location.y, location.z),
           coords = location
         }
       end
