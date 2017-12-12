@@ -304,7 +304,7 @@ AddEventHandler('brv:stopGame', function(winnerName, restart)
 
   for k, safeZoneBlip in pairs(safeZonesBlips) do
     RemoveBlip(safeZoneBlip)
-    safeZoneBlips[k] = nil
+    safeZonesBlips[k] = nil
   end
 
   for k, pickupBlip in pairs(pickupBlips) do
