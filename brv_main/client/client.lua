@@ -300,7 +300,9 @@ AddEventHandler('brv:stopGame', function(winnerName, restart)
     setPlayerInSpectatorMode(false)
   end
 
-  showNotification('And the winner is ~r~' .. winnerName)
+  if winnerName then
+    showNotification('~g~<C>'..winnerName..'</C>~w~ won the Battle')
+  end
 
   exports.spawnmanager:spawnPlayer(false, function()
     player.skin = changeSkin(player.skin)
