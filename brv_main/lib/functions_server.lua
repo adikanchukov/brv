@@ -1,3 +1,25 @@
+local killedMessage = {
+  "killed",
+  "destroyed",
+  "finished",
+  "ended",
+  "murdered",
+  "wiped out",
+  "executed",
+  "erased",
+  "whacked",
+  "deaded",
+  "slain",
+  "atomized",
+  "raped",
+  "assassinated",
+  "fucked up",
+}
+
+function getKilledMessage()
+  return killedMessage[math.random(count(killedMessage))]
+end
+
 function sendMessage(target, name, color, message)
   TriggerClientEvent('chatMessage', target, name, color, message)
   print(tostring(name) .. ' : ' .. message)

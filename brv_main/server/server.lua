@@ -390,12 +390,12 @@ AddEventHandler('brv:stopGame', function(restart, noWin)
   if count(players) < conf.autostart then restart = false end
 
   if not isGameStarted then
-    TriggerClientEvent('brv:stopGame', -1, 'no one', restart)
+    TriggerClientEvent('brv:stopGame', -1, nil, restart)
     return false
   end
   -- Get the winner
   local alivePlayers = getAlivePlayers()
-  local winner = { id = nil, name = 'no one' }
+  local winner = { id = nil, name = nil }
   if not noWin and count(alivePlayers) == 1 then
     winner = alivePlayers[1]
     winner.rank = 1
@@ -430,9 +430,7 @@ AddEventHandler('brv:dropPlayer', function(source, reason)
   DropPlayer(source, reason)
 end)
 
-AddEventHandler('brv:playerDied', function(source, type, killer)
-  local message = ''
-
+AddEventHandler('brv:playerDied', function(source, killer, suicide)
   players[source].rank = nbAlivePlayers;
   TriggerClientEvent('brv:wastedScreen', source, players[source].rank, players[source].kills)
 
@@ -440,15 +438,18 @@ AddEventHandler('brv:playerDied', function(source, type, killer)
   players[source].alive = false
   updateAlivePlayers(-1)
 
-  if source == killer then
-    message = '~r~' .. getPlayerName(source) .. '~s~  killed himself'
+  local message = ''
+  local playerName = '<C>'..getPlayerName(source)..'</C>'
+
+  if suicide then
+    message = playerName..' commited suicide'
+  elseif killer then
+    local killerName = '<C>'..getPlayerName(killer)..'</C>'
+    message = killerName..' '..getKilledMessage()..' ~r~'..playerName
   else
-    if type == 'killed' and killer ~= nil and getPlayerName(killer) then
-      message = '~r~' .. getPlayerName(source) .. '~s~  was killed by ~r~' .. getPlayerName(killer)
-    else
-      message = '~r~' .. getPlayerName(source) .. '~s~  was killed'
-    end
+    message = playerName..' died'
   end
+
   sendNotification(-1, message)
 
   if not conf.debug and isGameStarted and nbAlivePlayers == 1 and count(players) > 1 then
@@ -466,13 +467,18 @@ AddEventHandler('playerDropped', function(reason)
   removePlayer(source, reason)
 end)
 
-AddEventHandler('baseevents:onPlayerDied', function(killedBy, coords)
-  TriggerEvent('brv:playerDied', source, 'died', killedBy)
+AddEventHandler('baseevents:onPlayerDied', function()
+  TriggerEvent('brv:playerDied', source, nil, true)
 end)
 
-AddEventHandler('baseevents:onPlayerKilled', function(killer, data)
+AddEventHandler('baseevents:onPlayerKilled', function(killer)
+  if killer ~= -1 then
+    TriggerEvent('brv:playerDied', source, killer)
+  else
+    TriggerEvent('brv:playerDied', source)
+  end
+
   if players[killer] ~= nil then
     players[killer].kills = players[killer].kills + 1;
   end
-  TriggerEvent('brv:playerDied', source, 'killed', killer)
 end)

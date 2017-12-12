@@ -13,7 +13,7 @@ end
 -- Print notification (bottom left)
 function showNotification(text)
   SetNotificationTextEntry("STRING")
-  AddTextComponentString(text:gsub('[^%w~!%.%(%)|# ]',''))
+  AddTextComponentString(text)
   DrawNotification(true, false)
 end
 
