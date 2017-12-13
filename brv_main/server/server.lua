@@ -201,6 +201,10 @@ function updateAlivePlayers(source)
   TriggerClientEvent('brv:updateAlivePlayers', source, alivePlayers)
 end
 
+Citizen.CreateThread(function()
+  math.randomseed(os.time())
+end)
+
 -- "First" spawn
 -- Is actually triggered every resource restart, because of gametype
 AddEventHandler('brv:playerFirstSpawned', function()
