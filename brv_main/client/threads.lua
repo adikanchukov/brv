@@ -7,6 +7,9 @@ Citizen.CreateThread(function()
   -- Disable health regeneration
   SetPlayerHealthRechargeMultiplier(PlayerId(), 0)
 
+  -- Draw Discord in menu
+  Citizen.InvokeNative(GetHashKey("ADD_TEXT_ENTRY"), 'FE_THDR_GTAO', 'Battle Royale V Reborn | '..conf.discordUrl)
+
   local isRadarExtended = false
 
   while true do
@@ -80,7 +83,6 @@ Citizen.CreateThread(function()
       h = '0' .. h
     end
     showText(h .. ':' .. m, 0.005, 0.05)
-    showText(conf.discordUrl, 0.45, 0.015, conf.color.green, 4)
 
     if getIsGameStarted() then
       message = 'Players remaining : ' .. getPlayersRemaining()
