@@ -145,17 +145,17 @@ Citizen.CreateThread(function()
           DisplayRadar(false)
           drawInstructionalButtons({
             {
-              button = '~INPUT_FRONTEND_LEFT~',
-              label = 'Previous player'
+              button = '~INPUT_ENTER~',
+              label = 'Quit'
             },
             {
               button = '~INPUT_FRONTEND_RIGHT~',
               label = 'Next Player'
             },
             {
-              button = '~INPUT_ENTER~',
-              label = 'Quit'
-            }
+              button = '~INPUT_FRONTEND_LEFT~',
+              label = 'Previous player'
+            },
           })
           showText('Spectating ' .. alivePlayers[index].name, 0.45, 0.05, conf.color.white)
           showText('Health : ' .. tostring(GetEntityHealth(GetPlayerPed(playerToSpec))), 0.45, 0.08, conf.color.grey)
