@@ -91,7 +91,7 @@ Citizen.CreateThread(function()
         message = 'The Battle will start soon...'
       else
         message = 'Waiting for '..getPlayersRemainingToAutostart()..' player(s) to start the Battle...'
-        showText('Type /vote to start the Battle immediately', 0.42, 0.105, conf.color.green)
+        showText('Type /vote to start the Battle immediately', 0.42, 0.075, conf.color.green)
       end
     end
 
@@ -99,8 +99,8 @@ Citizen.CreateThread(function()
 
     if isPlayerInLobby() and not isPlayerInSpectatorMode() then
       if getIsGameStarted() then
-        showText('THE BATTLE IS CURRENTLY GOING', 0.441, 0.105, conf.color.red)
-        showText('You can spectate on TV while waiting for the new Battle', 0.395, 0.14, conf.color.red)
+        showText('THE BATTLE IS CURRENTLY GOING', 0.441, 0.075, conf.color.red)
+        showText('You can spectate on TV while waiting for the new Battle', 0.395, 0.11, conf.color.grey)
       end
     end
   end
