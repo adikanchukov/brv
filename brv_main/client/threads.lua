@@ -93,7 +93,7 @@ Citizen.CreateThread(function()
       end
     end
 
-    showText(message, 0.005, 0.075, {r = 255, g = 255, b = 255})
+    showText(message, 0.005, 0.075, conf.color.white)
 
     if isPlayerInLobby() and not isPlayerInSpectatorMode() then
       if getIsGameStarted() then
