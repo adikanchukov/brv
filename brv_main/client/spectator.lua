@@ -143,7 +143,20 @@ Citizen.CreateThread(function()
         if alivePlayers[index] ~= nil then
           -- Disable the radar and display some info
           DisplayRadar(false)
-          showHelp('Use ~INPUT_FRONTEND_LEFT~ or ~INPUT_FRONTEND_RIGHT~ to switch between players')
+          drawInstructionalButtons({
+            {
+              button = '~INPUT_FRONTEND_LEFT~',
+              label = 'Previous player'
+            },
+            {
+              button = '~INPUT_FRONTEND_RIGHT~',
+              label = 'Next Player'
+            },
+            {
+              button = '~INPUT_ENTER~',
+              label = 'Quit'
+            }
+          })
           showText('Spectating ' .. alivePlayers[index].name, 0.45, 0.05, conf.color.green)
           showText('Health : ' .. tostring(GetEntityHealth(GetPlayerPed(playerToSpec))), 0.45, 0.08, conf.color.green)
         else
