@@ -152,6 +152,7 @@ function setSafeZone(safeZoneBlip, safeZone, step, removeBlip)
 
   safeZoneBlip = AddBlipForRadius(safeZone.x, safeZone.y, safeZone.z, safeZone.radius * 1.0)
   SetBlipColour(safeZoneBlip, colorIndex)
+  SetBlipHighDetail(safeZoneBlip, true)
   SetBlipAlpha(safeZoneBlip, 100 + (10*step)) --
 
   return safeZoneBlip
