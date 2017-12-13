@@ -2,15 +2,12 @@
 --                               BATTLE ROYALE V                              --
 --                                Spectator file                              --
 --------------------------------------------------------------------------------
--- Toggle spectating playerId
-local blips = {}
+
 -- Spectator mode flag
 local spectatorMode = false
 local playerToSpec = nil
 
-function getSpectatorBlips()
-  return blips
-end
+local spectatorBlips = { }
 
 function isPlayerInSpectatorMode()
   return spectatorMode
@@ -33,12 +30,11 @@ function spectatePlayer(player, playerId, enable)
     local playerPed
     local players = getAlivePlayers()
 
-    TriggerEvent('brv:setCompassShow', not enable)
-
     -- Remove blips for alive players
-    if #blips > 0 then
-      for i,v in ipairs(blips) do
-        RemoveBlip(v)
+    if count(spectatorBlips) ~= 0 then
+      for i, blip in pairs(spectatorBlips) do
+        RemoveBlip(blip)
+        spectatorBlips[i] = nil
       end
     end
 
@@ -50,12 +46,14 @@ function spectatePlayer(player, playerId, enable)
       NetworkSetInSpectatorMode(1, playerPed)
 
       -- Adds blip for alive players
-      for i,v in ipairs(players) do
-        blips[i] = AddBlipForEntity(GetPlayerPed(GetPlayerFromServerId(v.source)))
-        SetBlipSprite(blips[i], 1)
+      for i, v in ipairs(players) do
+        spectatorBlips[i] = AddBlipForEntity(GetPlayerPed(GetPlayerFromServerId(v.source)))
+        SetBlipSprite(spectatorBlips[i], 1)
         if v.id == player.id then
-          SetBlipColour(blips[i], 1)
+          SetBlipColour(spectatorBlips[i], 1)
         end
+
+        setBlipName(spectatorBlips[i], v.name)
       end
     else
       playerPed = GetPlayerPed(-1)
