@@ -1,4 +1,4 @@
-local maxPlayersCount = GetConvarInt('sv_maxclients', 31)
+local maxPlayersCount = GetConvarInt('sv_maxclients', 32)
 local adminId = GetConvar('sv_adminId', '')
 
 local playerCount = 0
