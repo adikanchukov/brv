@@ -50,6 +50,20 @@ Citizen.CreateThread(function()
   end
 end)
 
+-- Set weather and time
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(33)
+
+    NetworkOverrideClockTime(conf.time.hours, conf.time.minutes, conf.time.seconds)
+
+    SetWeatherTypePersist(conf.weather)
+    SetWeatherTypeNowPersist(conf.weather)
+    SetWeatherTypeNow(conf.weather)
+    SetOverrideWeather(conf.weather)
+  end
+end)
+
 -- Print a clock top left and number of players remaining
 Citizen.CreateThread(function()
   local message = ''

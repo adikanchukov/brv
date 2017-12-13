@@ -11,4 +11,10 @@ conf = {
   instantDeathTimer = 90,
   safeZoneTimer = 300,
   autostartTimer = 60,
+  time = {
+    hours = 12,
+    minutes = 0,
+    seconds = 0,
+  },
+  weather = "CLEAR", --"CLEAR", "EXTRASUNNY", "CLOUDS", "OVERCAST", "RAIN", "CLEARING", "THUNDER", "SMOG", "FOGGY", "SNOWLIGHT", "BLIZZARD"
 }

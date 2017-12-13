@@ -104,8 +104,6 @@ end
 AddEventHandler('onClientMapStart', function()
   exports.spawnmanager:setAutoSpawn(false)
   exports.spawnmanager:spawnPlayer()
-  SetClockTime(24, 0, 0)
-  PauseClock(true)
 
   -- Voice proximity
   NetworkSetTalkerProximity(0.0)
