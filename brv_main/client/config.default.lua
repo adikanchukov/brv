@@ -11,6 +11,7 @@ conf = {
   instantDeathTimer = 90,
   safeZoneTimer = 300,
   autostartTimer = 60,
+  playerMaxHealth = 400, --200 by default
   time = {
     hours = 12,
     minutes = 0,

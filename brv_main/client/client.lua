@@ -243,6 +243,10 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   -- Enable drop weapon after death
   SetPedDropsWeaponsWhenDead(ped, true)
 
+  -- Set max health
+  SetPedMaxHealth(ped, conf.playerMaxHealth or 200)
+  SetEntityHealth(ped, GetPedMaxHealth(ped))
+
   -- Sets all safezones
   safeZones = svSafeZonesCoords
 
