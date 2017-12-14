@@ -303,9 +303,9 @@ AddEventHandler('brv:stopGame', function(winnerName, restart)
   end
 
   if winnerName then
-    showNotification('~g~<C>'..winnerName..'</C>~w~ won the Battle')
+    showNotification('~g~<C>'..winnerName..'</C>~w~ has won the Battle.')
   else
-    showNotification('No one won the Battle')
+    showNotification('No one has won the Battle.')
   end
 
   exports.spawnmanager:spawnPlayer(false, function()

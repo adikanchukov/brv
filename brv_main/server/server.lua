@@ -57,7 +57,7 @@ function loadPlayer(source)
       if player ~= nil then
         if player.status == 0 then
           print('Dropping player, banned : ' .. steamId .. ' (' .. source .. ')')
-          TriggerEvent('brv:dropPlayer', source, 'You\'re banned !')
+          TriggerEvent('brv:dropPlayer', source, 'You are permanently banned from this server.')
           return
         end
         players[source] = Player.new(player.id, steamId, player.name, player.role, player.skin, source)
@@ -446,12 +446,12 @@ AddEventHandler('brv:playerDied', function(source, killer, suicide)
   local playerName = '<C>'..getPlayerName(source)..'</C>'
 
   if suicide then
-    message = playerName..' commited suicide'
+    message = playerName..' commited suicide.'
   elseif killer then
     local killerName = '<C>'..getPlayerName(killer)..'</C>'
-    message = killerName..' '..getKilledMessage()..' ~r~'..playerName
+    message = '~r~'..killerName..' ~w~'..getKilledMessage()..' ~r~'..playerName
   else
-    message = playerName..' died'
+    message = playerName..' died.'
   end
 
   sendNotification(-1, message)

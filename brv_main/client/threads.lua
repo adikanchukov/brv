@@ -115,7 +115,7 @@ Citizen.CreateThread(function()
       if NetworkIsPlayerActive(PlayerId()) then
         for i, pickup in pairs(getPickups()) do
           if HasPickupBeenCollected(pickup.id) then
-            showNotification('Picked up '..pickup.name)
+            showNotification('Picked up '..pickup.name..'.')
 
             SetBlipColour(getPickupBlips()[i], 20)
 
