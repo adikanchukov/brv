@@ -250,11 +250,6 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   -- Sets all safezones
   safeZones = svSafeZonesCoords
 
-  -- Generate pickup blips
-  for i, location in pairs(locations) do
-    pickupBlips[i] = addPickupBlip(location)
-  end
-
   -- Set game state as started
   isGameStarted = true
 
@@ -284,6 +279,8 @@ AddEventHandler('brv:createPickups', function(pickupIndexes)
       name = pickupItem.name,
       coords = locations[k]
     }
+
+    pickupBlips[k] = addPickupBlip(pickupItem.id, locations[k], pickupItem.color)
   end
 end)
 

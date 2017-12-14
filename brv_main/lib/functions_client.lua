@@ -3,6 +3,59 @@
 --                            Client functions file                           --
 --------------------------------------------------------------------------------
 
+local itemBlips = {
+    ["PICKUP_WEAPON_APPISTOL"] = 156,
+    ["PICKUP_WEAPON_ASSAULTSHOTGUN"] = 158,
+    ["PICKUP_WEAPON_ASSAULTSMG"] = 159,
+    ["PICKUP_WEAPON_AUTOSHOTGUN"] = 158,
+    ["PICKUP_WEAPON_BULLPUPSHOTGUN"] = 158,
+    ["PICKUP_WEAPON_COMBATMG"] = 159,
+    ["PICKUP_WEAPON_COMBATPDW"] = 159,
+    ["PICKUP_WEAPON_COMBATPISTOL"] = 156,
+    ["PICKUP_WEAPON_FLAREGUN"] = 156,
+    ["PICKUP_WEAPON_DBSHOTGUN"] = 158,
+    ["PICKUP_WEAPON_GRENADE"] = 152,
+    ["PICKUP_WEAPON_GUSENBERG"] = 159,
+    ["PICKUP_WEAPON_HEAVYPISTOL"] = 156,
+    ["PICKUP_WEAPON_HEAVYSHOTGUN"] = 158,
+    ["PICKUP_WEAPON_MACHINEPISTOL"] = 159,
+    ["PICKUP_WEAPON_MARKSMANPISTOL"] = 156,
+    ["PICKUP_WEAPON_MG"] = 159,
+    ["PICKUP_WEAPON_MICROSMG"] = 159,
+    ["PICKUP_WEAPON_MINISMG"] = 159,
+    ["PICKUP_WEAPON_MOLOTOV"] = 155,
+    ["PICKUP_WEAPON_PIPEBOMB"] = 152,
+    ["PICKUP_WEAPON_PISTOL"] = 156,
+    ["PICKUP_WEAPON_PISTOL50"] = 156,
+    ["PICKUP_WEAPON_PROXMINE"] = 152,
+    ["PICKUP_WEAPON_PUMPSHOTGUN"] = 158,
+    ["PICKUP_WEAPON_REVOLVER"] = 156,
+    ["PICKUP_WEAPON_RPG"] = 157,
+    ["PICKUP_WEAPON_HOMINGLAUNCHER"] = 157,
+    ["PICKUP_WEAPON_SAWNOFFSHOTGUN"] = 158,
+    ["PICKUP_WEAPON_MUSKET"] = 158,
+    ["PICKUP_WEAPON_SMG"] = 159,
+    ["PICKUP_WEAPON_SMOKEGRENADE"] = 152,
+    ["PICKUP_WEAPON_SNSPISTOL"] = 156,
+    ["PICKUP_WEAPON_STICKYBOMB"] = 152,
+    ["PICKUP_WEAPON_VINTAGEPISTOL"] = 156,
+    ["PICKUP_WEAPON_ADVANCEDRIFLE"] = 150,
+    ["PICKUP_WEAPON_ASSAULTRIFLE"] = 150,
+    ["PICKUP_WEAPON_BULLPUPRIFLE"] = 150,
+    ["PICKUP_WEAPON_CARBINERIFLE"] = 150,
+    ["PICKUP_WEAPON_COMPACTLAUNCHER"] = 174,
+    ["PICKUP_WEAPON_COMPACTRIFLE"] = 150,
+    ["PICKUP_WEAPON_GRENADELAUNCHER"] = 174,
+    ["PICKUP_WEAPON_HEAVYSNIPER"] = 160,
+    ["PICKUP_WEAPON_MARKSMANRIFLE"] = 160,
+    ["PICKUP_WEAPON_SNIPERRIFLE"] = 160,
+    ["PICKUP_WEAPON_MINIGUN"] = 173,
+    ["PICKUP_WEAPON_SPECIALCARBINE"] = 150,
+    ["PICKUP_ARMOUR_STANDARD"] = 175,
+    ["PICKUP_HEALTH_SNACK"] = 153,
+    ["PICKUP_HEALTH_STANDARD"] = 153,
+}
+
 -- Prints help text (top left)
 function showHelp(str)
   SetTextComponentFormat("STRING")
@@ -165,14 +218,14 @@ function setBlipName(blip, name)
 end
 
 -- https://marekkraus.sk/gtav/blips/list.html
-function addPickupBlip(coords)
+function addPickupBlip(id, coords, color)
   local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
 
-  SetBlipSprite(blip, 66)
+  SetBlipSprite(blip, itemBlips.id or 66)
   SetBlipHighDetail(blip, true)
   SetBlipAsShortRange(blip, true)
 
-  setBlipName(blip, "Loot")
+  if color then SetBlipColour(blip, color) end
 
   return blip
 end

@@ -68,9 +68,9 @@ pickupItems = {
     { id = "PICKUP_WEAPON_STICKYBOMB", name = "Sticky Bomb" },
 
     --Ammunition
-    { id = "PICKUP_HEALTH_SNACK", name = "Snack" },
-    { id = "PICKUP_HEALTH_STANDARD", name = "First Aid Kit" },
-    { id = "PICKUP_ARMOUR_STANDARD", name = "Body Armor" },
+    { id = "PICKUP_HEALTH_SNACK", color = 2, name = "Snack" },
+    { id = "PICKUP_HEALTH_STANDARD", color = 2, name = "First Aid Kit" },
+    { id = "PICKUP_ARMOUR_STANDARD", color = 3, name = "Body Armor" },
 
     --Heavy Weapons
     --{ id = "PICKUP_WEAPON_COMPACTLAUNCHER", name = "Compact Grenade Launcher" },
