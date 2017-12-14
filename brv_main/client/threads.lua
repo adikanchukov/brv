@@ -10,6 +10,13 @@ Citizen.CreateThread(function()
   -- Draw Discord in menu
   Citizen.InvokeNative(GetHashKey("ADD_TEXT_ENTRY"), 'FE_THDR_GTAO', 'Battle Royale V Reborn | '..conf.discordUrl)
 
+  local player = PlayerId()
+
+  -- Disable cops
+  SetPoliceIgnorePlayer(player, true)
+  SetDispatchCopsForPlayer(player, false)
+  SetMaxWantedLevel(0)
+
   local isRadarExtended = false
 
   while true do
@@ -22,7 +29,7 @@ Citizen.CreateThread(function()
     end
 
     -- Infinite stamina
-    ResetPlayerStamina(PlayerId())
+    ResetPlayerStamina(player)
   end
 end)
 
