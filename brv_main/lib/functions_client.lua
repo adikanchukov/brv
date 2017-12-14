@@ -154,6 +154,7 @@ function showCountdown(duration, step, callback)
         timeDiff = GetTimeDifference(GetGameTimer(), startedAt)
         countdown = duration - tonumber(round(timeDiff / (step * 1000)))
 
+        local color = conf.color.white
         if countdown < (duration / 10) then
           color = conf.color.red
         end
@@ -221,7 +222,7 @@ end
 function addPickupBlip(id, coords, color)
   local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
 
-  SetBlipSprite(blip, itemBlips.id or 66)
+  SetBlipSprite(blip, itemBlips[id])
   SetBlipHighDetail(blip, true)
   SetBlipAsShortRange(blip, true)
 

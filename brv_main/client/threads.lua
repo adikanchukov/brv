@@ -126,7 +126,7 @@ Citizen.CreateThread(function()
           if HasPickupBeenCollected(pickup.id) then
             showNotification('Picked up '..pickup.name..'.')
 
-            SetBlipAlpha(getPickupBlips()[i], 160)
+            SetBlipAlpha(getPickupBlips()[i], 128)
 
             TriggerEvent('brv:removePickup', i)
           end

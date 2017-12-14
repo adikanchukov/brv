@@ -437,13 +437,13 @@ AddEventHandler('brv:playerDied', function(source, killer, suicide)
   updateAlivePlayers(-1)
 
   local message = ''
-  local playerName = '<C>'..getPlayerName(source)..'</C>'
+  local playerName = '~o~<C>'..getPlayerName(source)..'</C>~w~'
 
   if suicide then
     message = playerName..' commited suicide.'
   elseif killer then
-    local killerName = '<C>'..getPlayerName(killer)..'</C>'
-    message = '~r~'..killerName..' ~w~'..getKilledMessage()..' ~r~'..playerName
+    local killerName = '~o~<C>'..getPlayerName(killer)..'</C>~w~'
+    message = killerName..' '..getKilledMessage()..' '..playerName
   else
     message = playerName..' died.'
   end
