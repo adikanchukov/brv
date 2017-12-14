@@ -74,7 +74,7 @@ Citizen.CreateThread(function()
   end
 end)
 
--- Print a clock top left and number of players remaining
+
 Citizen.CreateThread(function()
   local message = ''
 
@@ -110,6 +110,8 @@ Citizen.CreateThread(function()
         showText('You can spectate on TV while waiting for the new Battle', 0.395, 0.11, conf.color.grey)
       end
     end
+
+    DisplayRadar(not isPlayerInSpectatorMode() and not isPlayerInLobby())
   end
 end)
 

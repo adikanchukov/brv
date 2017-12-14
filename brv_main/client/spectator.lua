@@ -80,7 +80,6 @@ Citizen.CreateThread(function()
   while true do
     Wait(0)
     SetEntityVisible(GetPlayerPed(-1), true)
-    DisplayRadar(true)
     -- Spectator mode
     if getIsGameStarted() and isPlayerInLobby() then
       alivePlayers = getAlivePlayers()
@@ -142,7 +141,6 @@ Citizen.CreateThread(function()
       if spectatorMode then
         if alivePlayers[index] ~= nil then
           -- Disable the radar and display some info
-          DisplayRadar(false)
           drawInstructionalButtons({
             {
               button = '~INPUT_ENTER~',
