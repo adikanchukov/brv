@@ -31,7 +31,6 @@ RegisterServerEvent('brv:saveCoords')
 RegisterServerEvent('brv:dropPlayer')
 RegisterServerEvent('brv:playerLoaded')
 RegisterServerEvent('brv:playerDied')
-RegisterServerEvent('brv:pickupCollected')
 RegisterServerEvent('brv:skinChanged')
 RegisterServerEvent('brv:saveSkin')
 RegisterServerEvent('brv:vote')
@@ -373,11 +372,6 @@ AddEventHandler('brv:startGame', function()
   end
 
   TriggerClientEvent('brv:createPickups', -1, pickupIndexes)
-end)
-
--- Remove a collected pickup to all other players
-AddEventHandler('brv:pickupCollected', function(index)
-  TriggerClientEvent('brv:removePickup', -1, index)
 end)
 
 -- Game has started for client, saves the spawning point and weapon

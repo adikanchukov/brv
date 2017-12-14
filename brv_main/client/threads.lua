@@ -127,7 +127,6 @@ Citizen.CreateThread(function()
             SetBlipColour(getPickupBlips()[i], 20)
 
             TriggerEvent('brv:removePickup', i)
-            TriggerServerEvent('brv:pickupCollected', i)
           end
         end
       end

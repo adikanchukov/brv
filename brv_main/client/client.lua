@@ -356,7 +356,7 @@ AddEventHandler('brv:nextSafeZone', function()
   end
 end)
 
--- Removes a pickup
+-- Remove a pickup
 AddEventHandler('brv:removePickup', function(index)
   if pickups[index] ~= nil then
     RemovePickup(pickups[index].id)
