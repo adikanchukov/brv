@@ -14,13 +14,6 @@ local nbAlivePlayers = 0
 local pickupsSpawned = false
 local gameId = 0
 local sqlDateFormat = '%Y-%m-%d %H:%M:%S'
-local radiuses = {
-  40.0,
-  300.0,
-  700.0,
-  1500.0,
-  3000.0
-}
 
 --------------------------------------------------------------------------------
 --                                  Events                                    --
@@ -322,18 +315,18 @@ AddEventHandler('brv:startGame', function()
       x = randomLocation.x,
       y = randomLocation.y,
       z = randomLocation.z,
-      radius = radiuses[1]
+      radius = conf.safeZoneRadiuses[1]
     }
   }
 
   for i = 1, 4 do
-    prevRad = radiuses[i]
+    prevRad = conf.safeZoneRadiuses[i]
 
     safeZonesCoords[i+1] = {
       x = safeZonesCoords[i].x + (math.random(prevRad - (20*i)) * (round(math.random()) * 2 - 1)),
       y = safeZonesCoords[i].y + (math.random(prevRad - (20*i)) * (round(math.random()) * 2 - 1)),
       z = safeZonesCoords[i].z,
-      radius = radiuses[i+1],
+      radius = conf.safeZoneRadiuses[i+1],
     }
   end
 

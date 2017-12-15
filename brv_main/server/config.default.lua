@@ -7,4 +7,11 @@ conf = {
   autostart = 10,
   stats = true,
   debug = false,
+  safeZoneRadiuses = {
+    40.0,
+    300.0,
+    700.0,
+    1500.0,
+    3000.0
+  },
 }
