@@ -186,7 +186,12 @@ function getRandomLocation()
 end
 
 function getRandomSpawn()
-  return spawns[GetRandomIntInRange(1, count(spawns) + 1)]
+  local startingSafeZone = getStartingSafeZone()
+
+  local angle = GetRandomFloatInRange(0.0, 1.0) * math.pi() * 2
+  local radius = math.sqrt(GetRandomFloatInRange(0.0, 1.0)) * startingSafeZone.radius
+
+  return { x = startingSafeZone.x + radius * math.cos(angle), y = startingSafeZone.y + radius * math.sin(angle), z = 1200 }
 end
 
 -- Sets the current safe zone and draws it on the map

@@ -50,6 +50,10 @@ RegisterNetEvent('brv:saveCoords') -- DEBUG : saves current coords (admin only)
 --------------------------------------------------------------------------------
 --                                 Functions                                  --
 --------------------------------------------------------------------------------
+function getStartingSafeZone()
+  return safeZones[1]
+end
+
 function getIsGameStarted()
   return isGameStarted
 end
@@ -208,8 +212,10 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
 
   nbPlayersRemaining = nbAlivePlayers
 
+  -- Sets all safezones
+  safeZones = svSafeZonesCoords
+
   player.spawn = getRandomSpawn()
-  player.spawn.z = 1200.0 -- Get high !
 
   local ped = GetPlayerPed(-1)
   local parachute = GetHashKey('gadget_parachute')
@@ -244,9 +250,6 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   -- Set max health
   SetPedMaxHealth(ped, conf.playerMaxHealth or 200)
   SetEntityHealth(ped, GetPedMaxHealth(ped))
-
-  -- Sets all safezones
-  safeZones = svSafeZonesCoords
 
   -- Set game state as started
   isGameStarted = true
