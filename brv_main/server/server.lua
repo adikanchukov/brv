@@ -110,6 +110,7 @@ function removePlayer(source, reason)
     if isGameStarted and players[source].alive then
       players[source].alive = false
       nbAlivePlayers = nbAlivePlayers - 1
+
       updateAlivePlayers(-1)
       if nbAlivePlayers == 1 then
         TriggerEvent('brv:stopGame', true, false)
@@ -119,6 +120,11 @@ function removePlayer(source, reason)
     sendSystemMessage(-1, players[source].name ..' left (' .. reason .. ')')
 
     players[source] = nil
+
+    local nbPlayers = count(getPlayers())
+    if nbPlayers < conf.autostart then
+      TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, conf.autostart - nbPlayers)
+    end
 
     if count(players) == 0 then
       if isGameStarted then
