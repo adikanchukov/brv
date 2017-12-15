@@ -84,7 +84,7 @@ Citizen.CreateThread(function()
     if getIsGameStarted() then
       message = 'Alive players:  ~o~' .. getPlayersRemaining()
     elseif not getIsGameEnded() then
-      message = getPlayersRemainingToAutostart()..' player(s) left to autostart.'
+      message = getPlayersRemainingToAutostart()..' player(s) left to autostart the match.'
     end
 
     if isPlayerInLobby() and not isPlayerInSpectatorMode() then
