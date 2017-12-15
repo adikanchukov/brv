@@ -89,7 +89,9 @@ Citizen.CreateThread(function()
         DrawMarker(1, tvCoords.x, tvCoords.y, tvCoords.z-1, 0, 0, 0, 0, 0, 0, 5.0, 5.0, 1.06, 6, 62, 145, 100, 0, 0, 0, 0)
         if isPlayerNearCoords(tvCoords, 2.5) then
           inTVZone = true
-          showHelp('Tap ~INPUT_ENTER~ to enter Spectator Mode')
+          if not spectatorMode then
+            showHelp('Tap ~INPUT_ENTER~ to enter Spectator Mode')
+          end
         else
           inTVZone = false
         end
