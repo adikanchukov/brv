@@ -218,16 +218,16 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   player.spawn = getRandomSpawn()
 
   local ped = GetPlayerPed(-1)
-  local parachute = GetHashKey('gadget_parachute')
-  local weapModel = getRandomMeleeWeapon()
-  local weapon = GetHashKey(weapModel)
 
   -- Remove all previously given weapons
   RemoveAllPedWeapons(ped, true)
 
-  -- Give a parachute and a random melee weapon
-  GiveWeaponToPed(ped, parachute, 1, false, false)
-  GiveWeaponToPed(ped, weapon, 1, false, true)
+  -- Give a parachute, random melee weapon and starting weapon
+  GiveWeaponToPed(ped, GetHashKey('gadget_parachute'), 1, false, false)
+  GiveWeaponToPed(ped, GetHashKey(getRandomMeleeWeapon()), 1, false, true)
+
+  local weaponHash = GetHashKey(conf.startingWeapon)
+  GiveWeaponToPed(ped, weaponHash, conf.weaponClipCount * GetWeaponClipSize(weaponHash), false, true)
 
   -- If player is dead, resurrect him on target
   if IsPedDeadOrDying(ped, true) then
@@ -258,7 +258,7 @@ AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   TriggerEvent('brv:nextSafeZone')
   TriggerServerEvent('brv:clientGameStarted', {
     spawn = player.spawn,
-    weapon = weapModel,
+    weapon = conf.startingWeapon,
   })
 end)
 

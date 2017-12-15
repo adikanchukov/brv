@@ -14,6 +14,7 @@ conf = {
   safeZonerTimerDec = 30,
   autostartTimer = 30,
   playerMaxHealth = 400, --200 by default
+  startingWeapon = "WEAPON_PISTOL",
   time = {
     hours = 12,
     minutes = 0,
