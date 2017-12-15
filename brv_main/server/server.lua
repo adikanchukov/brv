@@ -287,13 +287,13 @@ AddEventHandler('brv:voteServer', function(source)
   if player.voted then
     sendSystemMessage(player.source, 'You already voted')
   elseif isGameStarted then
-    sendSystemMessage(player.source, 'You can\'t vote during the Battle')
+    sendSystemMessage(player.source, 'You can\'t vote during the match')
   else
     vote(player.source)
-    sendSystemMessage(-1, '^5' .. player.name .. '^2 voted for the Battle to begin')
+    sendSystemMessage(-1, '^5' .. player.name .. '^2 voted for the match to begin')
     local nbPlayers = count(getPlayers())
     if nbPlayers > 1 and getVotes() > math.floor(nbPlayers / 2) then
-      sendSystemMessage(-1, '^0Voting is over, the Battle will begin soon...')
+      sendSystemMessage(-1, '^0Voting is over, the match will begin soon...')
       TriggerClientEvent('brv:restartGame', -1)
     end
   end

@@ -301,9 +301,9 @@ AddEventHandler('brv:stopGame', function(winnerName, restart)
   end
 
   if winnerName then
-    showNotification('~g~<C>'..winnerName..'</C>~w~ has won the Battle.')
+    showNotification('~g~<C>'..winnerName..'</C>~w~ has won the match.')
   else
-    showNotification('No one has won the Battle.')
+    showNotification('No one has won the match.')
   end
 
   exports.spawnmanager:spawnPlayer(false, function()
@@ -430,9 +430,9 @@ Citizen.CreateThread(function()
       end
       playerOutOfZone = isPlayerOutOfZone(safeZones[currentSafeZone])
       if playerOutOfZone then
-        showText('GO TO THE SAFE ZONE', 0.894, 0.05, conf.color.red, 2)
+        showText('Get into the ~y~safe area~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
       else
-        showText('YOU ARE IN THE SAFE ZONE', 0.87, 0.05, conf.color.green, 2)
+        showText('Take out the other ~o~players~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
       end
     end
   end

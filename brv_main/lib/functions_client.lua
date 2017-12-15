@@ -71,21 +71,26 @@ function showNotification(text)
 end
 
 -- Print a text at coords
-function showText(text, x, y, color, font)
-  if color == nil then
-    color = conf.color.grey
-  end
-  if font == nil then
-    font = 4
-  end
-  SetTextFont(font)
+function showText(text, x, y, color, font, scale, center, shadow)
+  color = color or conf.color.grey
+
+  SetTextFont(font or 4)
   SetTextProportional(1)
-  SetTextScale(0.0, 0.5)
-  SetTextColour(color.r, color.g, color.b, 255)
-  -- SetTextDropshadow(0, 0, 0, 0, 255)
-  -- SetTextEdge(1, 0, 0, 0, 255)
-  -- SetTextDropShadow()
-  SetTextOutline()
+  SetTextScale(scale or 0.0, scale or 0.5)
+  SetTextColour(color.r, color.g, color.b, color.a or 255)
+
+  if shadow then
+    SetTextDropshadow(8, 0, 0, 0, 255)
+    SetTextEdge(1, 0, 0, 0, 255)
+    --SetTextDropShadow()
+  else
+    SetTextOutline()
+  end
+
+  if center then
+    SetTextCentre(true)
+  end
+
   SetTextEntry("STRING")
   AddTextComponentString(text)
   DrawText(x, y)
@@ -137,6 +142,18 @@ function changeSkin(skin)
   return model
 end
 
+function secondsToMMSS(seconds)
+  local seconds = tonumber(seconds)
+
+  if seconds <= 0 then
+    return "00:00";
+  else
+    mins = string.format("%02.f", math.floor(seconds / 60));
+    secs = string.format("%02.f", math.floor(seconds -  mins * 60));
+    return mins..":"..secs
+  end
+end
+
 -- Sets a countdown
 -- duration (integer) : Duration of the countdown (seconds)
 -- step (integer) : Step of the countdown (seconds)
@@ -159,7 +176,7 @@ function showCountdown(duration, step, callback)
           color = conf.color.red
         end
 
-        showText(tonumber(round(countdown)) .. 's remaining', 0.93, 0.08, color)
+        showText(secondsToMMSS(round(countdown)), 0.5, 0.875, { r = 220, g = 220, b = 220, a = 192 }, 1, 1.5, true)
 
         if countdown <= 0 then
           run = false

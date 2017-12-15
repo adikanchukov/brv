@@ -83,7 +83,7 @@ end)
 -- Change the skin, if the game has not already started
 addCommand('skin', function(player, args)
   if getIsGameStarted() then
-    sendSystemMessage(player.source, 'You can\'t change your skin during the Battle')
+    sendSystemMessage(player.source, 'You can\'t change your skin during the match')
   else
     TriggerClientEvent('brv:changeSkin', player.source)
   end
@@ -94,7 +94,7 @@ end)
 -- Saves the current player skin
 addCommand('saveskin', function(player, args)
   if getIsGameStarted() then
-    sendSystemMessage(player.source, 'You can\'t save your skin during the Battle')
+    sendSystemMessage(player.source, 'You can\'t save your skin during the match')
   else
     TriggerEvent('brv:saveSkin', player.source)
   end
@@ -105,7 +105,7 @@ end)
 -- Vote for the game to start
 addCommand('vote', function(player, args)
   if getIsGameStarted() then
-    sendSystemMessage(player.source, 'You can\'t vote during the Battle')
+    sendSystemMessage(player.source, 'You can\'t vote during the match')
   else
     TriggerEvent('brv:voteServer', player.source)
   end
@@ -116,7 +116,7 @@ end)
 -- Change the player's name
 addCommand('name', function(player, args)
   if getIsGameStarted() then
-    sendSystemMessage(player.source, 'You can\'t change your name during the Battle')
+    sendSystemMessage(player.source, 'You can\'t change your name during the match')
   else
     if #args == 0 then
       sendSystemMessage(player.source, 'Invalid name')
