@@ -22,7 +22,6 @@ local safeZonesBlips = {} -- All safezones blips
 local currentSafeZone = 1 -- Current safe zone
 
 local safeZoneTimer -- Global safe zone timer, default value is in the config file
-local safeZoneTimerDec -- Step of the timer
 
 --------------------------------------------------------------------------------
 --                                  Events                                    --
@@ -205,7 +204,6 @@ end)
 AddEventHandler('brv:startGame', function(nbAlivePlayers, svSafeZonesCoords)
   gameEnded = false
   safeZoneTimer = conf.safeZoneTimer
-  safeZoneTimerDec = safeZoneTimer / 5
   currentSafeZone = 1
 
   nbPlayersRemaining = nbAlivePlayers
@@ -345,7 +343,7 @@ AddEventHandler('brv:nextSafeZone', function()
       -- Sets counter
       showCountdown(safeZoneTimer, 1 , function() -- 1 + step ?
         currentSafeZone = currentSafeZone + 1
-        safeZoneTimer = safeZoneTimer - safeZoneTimerDec
+        safeZoneTimer = safeZoneTimer - conf.safeZoneTimerDec
         -- Rince, repeat
         TriggerEvent('brv:nextSafeZone')
       end)
