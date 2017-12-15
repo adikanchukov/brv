@@ -304,12 +304,13 @@ end)
 --------------------------------------------------------------------------------
 AddEventHandler('brv:startGame', function()
   if isGameStarted then return end
+
   checkPlayers()
 
   isGameStarted = true
-  local prevRad
-  local randomLocation = getRandomLocation()
 
+  -- Generate first (smallest) safe zone
+  local randomLocation = getRandomLocation()
   safeZonesCoords = {
     {
       x = randomLocation.x,
@@ -319,19 +320,23 @@ AddEventHandler('brv:startGame', function()
     }
   }
 
-  for i = 1, 4 do
-    prevRad = conf.safeZoneRadiuses[i]
+  -- Generate other safe zones
+  local previousRadius = nil
+  for i = 1, count(conf.safeZoneRadiuses) - 1 do
+    previousRadius = conf.safeZoneRadiuses[i]
 
-    safeZonesCoords[i+1] = {
-      x = safeZonesCoords[i].x + (math.random(prevRad - (20*i)) * (round(math.random()) * 2 - 1)),
-      y = safeZonesCoords[i].y + (math.random(prevRad - (20*i)) * (round(math.random()) * 2 - 1)),
+    safeZonesCoords[i + 1] = {
+      x = safeZonesCoords[i].x + (math.random(previousRadius - (20 * i)) * (round(math.random()) * 2 - 1)),
+      y = safeZonesCoords[i].y + (math.random(previousRadius - (20 * i)) * (round(math.random()) * 2 - 1)),
       z = safeZonesCoords[i].z,
-      radius = conf.safeZoneRadiuses[i+1],
+      radius = conf.safeZoneRadiuses[i + 1],
     }
   end
 
-  safeZonesCoords[5] = limitMap(safeZonesCoords[5])
+  -- Limit biggest safe zone by map size
+  safeZonesCoords[count(conf.safeZoneRadiuses)] = limitMap(safeZonesCoords[count(conf.safeZoneRadiuses)])
 
+  -- Reverse safe zones
   safeZonesCoords = table_reverse(safeZonesCoords)
 
   -- Sets all players alive, and init some other variables
