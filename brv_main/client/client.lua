@@ -342,7 +342,7 @@ AddEventHandler('brv:nextSafeZone', function()
       end
     end
     if not conf.debug then
-      safeZonesBlips[currentSafeZone] = setSafeZone(safeZonesBlips[currentSafeZone - 1], safeZones[currentSafeZone], currentSafeZone, true)
+      safeZonesBlips[currentSafeZone] = setSafeZone(safeZonesBlips[currentSafeZone - 2], safeZones[currentSafeZone], currentSafeZone, true)
       -- Sets counter
       showCountdown(safeZoneTimer, 1 , function() -- 1 + step ?
         currentSafeZone = currentSafeZone + 1
