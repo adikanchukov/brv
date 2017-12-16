@@ -122,11 +122,9 @@ function removePlayer(source, reason)
     players[source] = nil
 
     local nbPlayers = count(getPlayers())
-    if nbPlayers < conf.autostart then
-      TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, conf.autostart - nbPlayers)
-    end
+    TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, math.max(conf.autostart - nbPlayers, 0))
 
-    if count(players) == 0 then
+    if nbPlayers == 0 then
       if isGameStarted then
           TriggerEvent('brv:stopGame', false, true)
       end
@@ -257,13 +255,11 @@ AddEventHandler('brv:playerLoaded', function(source, player)
   TriggerEvent('chatMessage', source, player.name, '/help')
 
   if not isGameStarted then
-    local nbPlayers = count(players)
+    local nbPlayers = count(getPlayers())
     if nbPlayers == conf.autostart then
       TriggerClientEvent('brv:restartGame', -1)
     else
-      if nbPlayers < conf.autostart then
-        TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, conf.autostart - nbPlayers)
-      end
+        TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, math.max(conf.autostart - nbPlayers, 0))
     end
   else
     updateAlivePlayers(source)
