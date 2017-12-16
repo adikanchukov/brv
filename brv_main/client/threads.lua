@@ -120,6 +120,35 @@ Citizen.CreateThread(function()
   end
 end)
 
+-- Displaying gamer tags in Spectator Mode
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+
+    if isPlayerInSpectatorMode() then
+      for _, player in ipairs(getAlivePlayers()) do
+        local playerId = GetPlayerFromServerId(player.source)
+        local gamerTag = CreateMpGamerTag(GetPlayerPed(playerId), player.name, false, false, "", 0)
+
+        local color = 0
+        if getSpectatingPlayer() == playerId then
+          color = 4
+        end
+
+        -- https://runtime.fivem.net/doc/reference.html#_0x63BB75ABEDC1F6A0
+        SetMpGamerTagName(gamerTag, player.name)
+        SetMpGamerTagColour(gamerTag, 0, color)
+        SetMpGamerTagHealthBarColour(gamerTag, color)
+        SetMpGamerTagAlpha(gamerTag, 0, 255)
+        SetMpGamerTagAlpha(gamerTag, 2, 255)
+
+        SetMpGamerTagVisibility(gamerTag, 0, true) -- GAMER_NAME
+        SetMpGamerTagVisibility(gamerTag, 2, true) -- HEALTH/ARMOR
+      end
+    end
+  end
+end)
+
 -- Auto respawning after 10 seconds
 local diedAt
 Citizen.CreateThread(function()

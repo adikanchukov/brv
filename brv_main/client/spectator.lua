@@ -13,6 +13,10 @@ function isPlayerInSpectatorMode()
   return spectatorMode
 end
 
+function getSpectatingPlayer()
+  return playerToSpec
+end
+
 function setPlayerInSpectatorMode(enable)
   spectatorMode = enable
   if not enable then
@@ -157,7 +161,7 @@ Citizen.CreateThread(function()
               label = 'Previous player'
             },
           })
-          showText('Spectating ~r~'..alivePlayers[index].name..'~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
+          showText('You are in Spectator Mode.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
         else
           if #alivePlayers > 0 then
             -- Current spectated player isn't there anymore, but there are still players to spectate
