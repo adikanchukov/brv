@@ -19,16 +19,16 @@ meleeWeapons = {
 
 pickupItems = {
     -- Handguns
-    { id = "PICKUP_WEAPON_PISTOL", name = "Pistol" },
-    { id = "PICKUP_WEAPON_APPISTOL", name = "AP Pistol" },
-    { id = "PICKUP_WEAPON_COMBATPISTOL", name = "Combat Pistol" },
-    { id = "PICKUP_WEAPON_FLAREGUN", name = "Flare Gun" },
-    { id = "PICKUP_WEAPON_HEAVYPISTOL", name = "Heavy Pistol" },
-    { id = "PICKUP_WEAPON_REVOLVER", name = "Heavy Revolver" },
-    { id = "PICKUP_WEAPON_MARKSMANPISTOL", name = "Marksman Pistol" },
-    { id = "PICKUP_WEAPON_PISTOL50", name = "Pistol .50" },
-    { id = "PICKUP_WEAPON_SNSPISTOL", name = "SNS Pistol" },
-    { id = "PICKUP_WEAPON_VINTAGEPISTOL", name = "Vintage Pistol" },
+    -- { id = "PICKUP_WEAPON_PISTOL", name = "Pistol" },
+    -- { id = "PICKUP_WEAPON_APPISTOL", name = "AP Pistol" },
+    -- { id = "PICKUP_WEAPON_COMBATPISTOL", name = "Combat Pistol" },
+    -- { id = "PICKUP_WEAPON_FLAREGUN", name = "Flare Gun" },
+    -- { id = "PICKUP_WEAPON_HEAVYPISTOL", name = "Heavy Pistol" },
+    -- { id = "PICKUP_WEAPON_REVOLVER", name = "Heavy Revolver" },
+    -- { id = "PICKUP_WEAPON_MARKSMANPISTOL", name = "Marksman Pistol" },
+    -- { id = "PICKUP_WEAPON_PISTOL50", name = "Pistol .50" },
+    -- { id = "PICKUP_WEAPON_SNSPISTOL", name = "SNS Pistol" },
+    -- { id = "PICKUP_WEAPON_VINTAGEPISTOL", name = "Vintage Pistol" },
 
     --Shotguns
     { id = "PICKUP_WEAPON_ASSAULTSHOTGUN", name = "Assault Shotgun" },
@@ -68,7 +68,7 @@ pickupItems = {
     { id = "PICKUP_WEAPON_STICKYBOMB", name = "Sticky Bomb" },
 
     --Ammunition
-    { id = "PICKUP_HEALTH_SNACK", color = 2, name = "Snack" },
+    -- { id = "PICKUP_HEALTH_SNACK", color = 2, name = "Snack" },
     { id = "PICKUP_HEALTH_STANDARD", color = 2, name = "First Aid Kit" },
     { id = "PICKUP_ARMOUR_STANDARD", color = 3, name = "Body Armor" },
 
