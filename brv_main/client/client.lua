@@ -384,7 +384,9 @@ Citizen.CreateThread(function()
     Wait(0)
     if isGameStarted and not playerInLobby and not IsEntityDead(PlayerPedId()) then
       if safeZones[currentSafeZone - 1] ~= nil then
+
         playerOutOfZone = isPlayerOutOfZone(safeZones[currentSafeZone - 1])
+
         if playerOutOfZone then
           if not playerOOZAt then playerOOZAt = GetGameTimer() end
 
@@ -394,25 +396,32 @@ Citizen.CreateThread(function()
           if countdown ~= prevCount then
             if countdown == 9 then
               PlaySoundFrontend(-1, 'Timer_10s', 'DLC_HALLOWEEN_FVJ_Sounds')
-            else
-              if countdown > 9 then
-                PlaySoundFrontend(-1, 'TIMER', 'HUD_FRONTEND_DEFAULT_SOUNDSET')
-              end
+            elseif countdown > 9 then
+              PlaySoundFrontend(-1, 'TIMER', 'HUD_FRONTEND_DEFAULT_SOUNDSET')
             end
             prevCount = countdown
           end
 
-          showText('GET IN THE SAFE ZONE : ' .. countdown .. '', 0.45, 0.125, conf.color.red, 2)
+          showText('GO BACK INTO THE PLAYING AREA ~r~: '..tostring(countdown), 0.5, 0.125, conf.color.white, 0, 0.7, true, true)
           if countdown < 0  then
             SetEntityHealth(GetPlayerPed(-1), 0)
             playerOOZAt = nil
           end
+        else
+          playerOOZAt = nil
+          timeDiff = 0
+          prevCount = conf.outOfZoneTimer
         end
+
         if currentSafeZone == (#safeZones+1) then
           if not lastZoneAt then lastZoneAt = GetGameTimer() end
           timeDiffLastZone = GetTimeDifference(GetGameTimer(), lastZoneAt)
           instantDeathCountdown = conf.instantDeathTimer - tonumber(round(timeDiffLastZone / 1000))
-          showText('ONLY ONE CAN SURVIVE : ' .. instantDeathCountdown .. '', 0.45, 0.1, conf.color.red, 2)
+
+          if not playerOutOfZone then
+            showText('ONLY ONE SHOULD SURVIVE ~r~: '..tostring(instantDeathCountdown), 0.5, 0.125, conf.color.white, 0, 0.7, true, true)
+          end
+
           if instantDeathCountdown < 0  then
             SetEntityHealth(GetPlayerPed(-1), 0)
             lastZoneAt = nil
@@ -421,12 +430,9 @@ Citizen.CreateThread(function()
           end
         else
           lastZoneAt = nil
-          timeDiffLastZone = 0
         end
-      else
-        playerOOZAt = nil
-        timeDiff = 0
       end
+
       playerOutOfZone = isPlayerOutOfZone(safeZones[currentSafeZone])
       if playerOutOfZone then
         showText('Get into the ~g~safe area~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
