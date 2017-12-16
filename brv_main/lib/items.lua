@@ -35,7 +35,7 @@ pickupItems = {
     { id = "PICKUP_WEAPON_BULLPUPSHOTGUN", name = "Bullpup Shotgun" },
     { id = "PICKUP_WEAPON_DBSHOTGUN", name = "Double Barrel Shotgun" },
     { id = "PICKUP_WEAPON_HEAVYSHOTGUN", name = "Heavy Shotgun" },
-    { id = "PICKUP_WEAPON_MUSKET", name = "Musket" },
+    --{ id = "PICKUP_WEAPON_MUSKET", name = "Musket" },
     { id = "PICKUP_WEAPON_PUMPSHOTGUN", name = "Pump Shotgun" },
     { id = "PICKUP_WEAPON_SAWNOFFSHOTGUN", name = "Sawed-Off Shotgun" },
     { id = "PICKUP_WEAPON_AUTOSHOTGUN", name = "Sweeper Shotgun" },
