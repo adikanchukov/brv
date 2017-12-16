@@ -342,7 +342,7 @@ AddEventHandler('brv:nextSafeZone', function()
       end
     end
     if not conf.debug then
-      safeZonesBlips[currentSafeZone] = setSafeZone(safeZonesBlips[currentSafeZone - 2], safeZones[currentSafeZone], currentSafeZone, true)
+      safeZonesBlips[currentSafeZone] = setSafeZone(safeZonesBlips[currentSafeZone - 1], safeZones[currentSafeZone], currentSafeZone, safeZonesBlips[currentSafeZone - 2])
       -- Sets counter
       showCountdown(safeZoneTimer, 1 , function() -- 1 + step ?
         currentSafeZone = currentSafeZone + 1
@@ -430,7 +430,7 @@ Citizen.CreateThread(function()
       end
       playerOutOfZone = isPlayerOutOfZone(safeZones[currentSafeZone])
       if playerOutOfZone then
-        showText('Get into the ~y~safe area~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
+        showText('Get into the ~g~safe area~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
       else
         showText('Take out the other ~o~players~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
       end

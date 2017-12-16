@@ -217,21 +217,20 @@ end
 -- safeZoneBlip (integer)
 -- safeZoneCoords (x, y, z)
 -- safeZoneRadius (float)
--- removeBlip (boolean) : If true, removes the previous drawed safe zone if it exists
 -- step (integer)
-function setSafeZone(safeZoneBlip, safeZone, step, removeBlip)
-  if removeBlip and safeZoneBlip ~= nil then
-    RemoveBlip(safeZoneBlip)
+function setSafeZone(prevSafeZoneBlip, safeZone, step, removingBlip)
+  if removingBlip then
+    RemoveBlip(removingBlip)
   end
 
-  local color = 5 --yellow
-
-  if step == 5 then color = 1 end --red
+  if prevSafeZoneBlip then
+    SetBlipColour(prevSafeZoneBlip, 5) -- Yellow
+  end
 
   safeZoneBlip = AddBlipForRadius(safeZone.x, safeZone.y, safeZone.z, safeZone.radius * 1.0)
-  SetBlipColour(safeZoneBlip, color)
+  SetBlipColour(safeZoneBlip, 2) -- Green
   SetBlipHighDetail(safeZoneBlip, true)
-  SetBlipAlpha(safeZoneBlip, 80 + (15 * step))
+  SetBlipAlpha(safeZoneBlip, 92)
 
   return safeZoneBlip
 end
