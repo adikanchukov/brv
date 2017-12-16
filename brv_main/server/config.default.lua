@@ -8,10 +8,10 @@ conf = {
   stats = true,
   debug = false,
   safeZoneRadiuses = {
-    100.0,
-    200.0,
-    400.0,
-    800.0,
+    75.0,
+    150.0,
+    300.0,
+    600.0,
     1200.0
   },
 }
