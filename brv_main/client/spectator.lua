@@ -157,8 +157,7 @@ Citizen.CreateThread(function()
               label = 'Previous player'
             },
           })
-          showText('Spectating ' .. alivePlayers[index].name, 0.45, 0.05, conf.color.grey)
-          showText('Health : ' .. tostring(GetEntityHealth(GetPlayerPed(playerToSpec))), 0.45, 0.08, conf.color.green)
+          showText('Spectating ~r~'..alivePlayers[index].name..'~w~.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
         else
           if #alivePlayers > 0 then
             -- Current spectated player isn't there anymore, but there are still players to spectate
