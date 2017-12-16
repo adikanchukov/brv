@@ -8,10 +8,10 @@ conf = {
     white = { r = 255, g = 255, b = 255 },
   },
   weaponClipCount = 3,
-  outOfZoneTimer = 10,
+  outOfZoneTimer = 20,
   instantDeathTimer = 30,
-  safeZoneTimer = 120,
-  safeZoneTimerDec = 24,
+  safeZoneTimer = 150,
+  safeZoneTimerDec = 30,
   autostartTimer = 15,
   playerMaxHealth = 400, --200 by default
   startingWeapon = "WEAPON_PISTOL",
