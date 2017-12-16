@@ -35,8 +35,8 @@ client_scripts {
   'lib/items.lua',
   'lib/functions_shared.lua',
   'lib/functions_client.lua',
-  'client/spectator.lua',
+  'client/client.lua',
   'client/threads.lua',
   'client/screens.lua',
-  'client/client.lua',
+  'client/spectator.lua',
 }
