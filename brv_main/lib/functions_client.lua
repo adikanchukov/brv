@@ -176,7 +176,7 @@ function showCountdown(duration, step, callback)
           color = conf.color.red
         end
 
-        if not isPlayerInLobby() and not IsEntityDead(PlayerPedId()) then
+        if not isPlayerInLobby() or isPlayerInSpectatorMode() then
           showText(secondsToMMSS(round(countdown)), 0.5, 0.875, { r = 220, g = 220, b = 220, a = 192 }, 1, 1.5, true)
         end
 
