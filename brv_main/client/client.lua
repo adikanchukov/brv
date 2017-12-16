@@ -54,6 +54,10 @@ function getStartingSafeZone()
   return safeZones[1]
 end
 
+function getSafeZoneCount()
+  return count(safeZones)
+end
+
 function getIsGameStarted()
   return isGameStarted
 end
@@ -378,6 +382,7 @@ Citizen.CreateThread(function()
   local playerOOZAt = nil
   local timeDiff = 0
   local prevCount = conf.outOfZoneTimer
+  local deathPrevCount = conf.instantDeathTimer
   local lastZoneAt = nil
   local instantDeathCountdown = 0
   local timeDiffLastZone = 0
@@ -396,15 +401,11 @@ Citizen.CreateThread(function()
           countdown = conf.outOfZoneTimer - tonumber(round(timeDiff / 1000))
 
           if countdown ~= prevCount then
-            if countdown == 9 then
-              PlaySoundFrontend(-1, 'Timer_10s', 'DLC_HALLOWEEN_FVJ_Sounds')
-            elseif countdown > 9 then
-              PlaySoundFrontend(-1, 'TIMER', 'HUD_FRONTEND_DEFAULT_SOUNDSET')
-            end
+            PlaySoundFrontend(-1, 'TIMER', 'HUD_FRONTEND_DEFAULT_SOUNDSET')
             prevCount = countdown
           end
 
-          showText('GO BACK INTO THE PLAYING AREA ~r~: '..tostring(countdown), 0.5, 0.125, conf.color.white, 0, 0.7, true, true)
+          showText('Get into the playing area ~r~: '..tostring(countdown), 0.5, 0.125, conf.color.white, 7, 0.65, true, true)
           if countdown < 0  then
             SetEntityHealth(GetPlayerPed(-1), 0)
             playerOOZAt = nil
@@ -415,13 +416,18 @@ Citizen.CreateThread(function()
           prevCount = conf.outOfZoneTimer
         end
 
-        if currentSafeZone == (#safeZones+1) then
+        if currentSafeZone == getSafeZoneCount() + 1 then
           if not lastZoneAt then lastZoneAt = GetGameTimer() end
           timeDiffLastZone = GetTimeDifference(GetGameTimer(), lastZoneAt)
           instantDeathCountdown = conf.instantDeathTimer - tonumber(round(timeDiffLastZone / 1000))
 
           if not playerOutOfZone then
-            showText('ONLY ONE SHOULD SURVIVE ~r~: '..tostring(instantDeathCountdown), 0.5, 0.125, conf.color.white, 0, 0.7, true, true)
+            showText('Only one should survive ~r~: '..tostring(instantDeathCountdown), 0.5, 0.125, conf.color.white, 7, 0.65, true, true)
+
+            if instantDeathCountdown ~= deathPrevCount then
+              PlaySoundFrontend(-1, 'TIMER', 'HUD_FRONTEND_DEFAULT_SOUNDSET')
+              deathPrevCount = instantDeathCountdown
+            end
           end
 
           if instantDeathCountdown < 0  then
