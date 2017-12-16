@@ -338,16 +338,15 @@ AddEventHandler('brv:nextSafeZone', function()
   if currentSafeZone <= #safeZones  then
     if conf.debug and currentSafeZone == 1 then
       for i, v in ipairs(safeZones) do
-        safeZonesBlips[i] = setSafeZone(nil, v, i, false)
+        safeZonesBlips[i] = setSafeZone(safeZones[i - 1], v, i, nil)
       end
     end
     if not conf.debug then
       safeZonesBlips[currentSafeZone] = setSafeZone(safeZonesBlips[currentSafeZone - 1], safeZones[currentSafeZone], currentSafeZone, safeZonesBlips[currentSafeZone - 2])
-      -- Sets counter
-      showCountdown(safeZoneTimer, 1 , function() -- 1 + step ?
+
+      showCountdown(safeZoneTimer, 1 , function()
         currentSafeZone = currentSafeZone + 1
         safeZoneTimer = safeZoneTimer - conf.safeZoneTimerDec
-        -- Rince, repeat
         TriggerEvent('brv:nextSafeZone')
       end)
     end
