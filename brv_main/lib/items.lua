@@ -60,7 +60,7 @@ pickupItems = {
     { id = "PICKUP_WEAPON_SPECIALCARBINE", name = "Special Carbine" },
 
     --Thrown Weapons
-    { id = "PICKUP_WEAPON_SMOKEGRENADE", name = "BZ Gas" },
+    --{ id = "PICKUP_WEAPON_SMOKEGRENADE", name = "BZ Gas" },
     { id = "PICKUP_WEAPON_GRENADE", name = "Grenade" },
     { id = "PICKUP_WEAPON_MOLOTOV", name = "Molotov Cocktail" },
     { id = "PICKUP_WEAPON_PROXMINE", name = "Proximity Mines" },
