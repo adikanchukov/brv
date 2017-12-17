@@ -307,8 +307,6 @@ end)
 AddEventHandler('brv:startGame', function()
   if isGameStarted then return end
 
-  checkPlayers()
-
   isGameStarted = true
 
   -- Generate first (smallest) safe zone

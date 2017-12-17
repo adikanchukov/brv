@@ -49,14 +49,3 @@ function limitMap(coords)
 
   return coords
 end
-
-function checkPlayers()
-  local players = getPlayers()
-
-  for k,player in pairs(players) do
-    if GetPlayerPing(player.source) == -1 or GetPlayerName(player.source) == '**Invalid**' then
-      print('Auto-removing player : ' .. player.name .. ' (' .. player.source .. ')')
-      removePlayer(player.source, 'Ghost')
-    end
-  end
-end
