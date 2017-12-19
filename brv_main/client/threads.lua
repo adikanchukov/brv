@@ -130,7 +130,7 @@ Citizen.CreateThread(function()
 
         local color = 0
         if getSpectatingPlayer() == playerId then
-          color = 4
+          color = 6
         end
 
         -- https://runtime.fivem.net/doc/reference.html#_0x63BB75ABEDC1F6A0
