@@ -82,7 +82,7 @@ end)
 -- /skin
 -- Change the skin, if the game has not already started
 addCommand('skin', function(player, args)
-  if getIsGameStarted() then
+  if getIsGameStarted() and player.alive then
     sendSystemMessage(player.source, 'You can\'t change your skin during the match')
   else
     TriggerClientEvent('brv:changeSkin', player.source)
@@ -93,7 +93,7 @@ end)
 -- /saveskin
 -- Saves the current player skin
 addCommand('saveskin', function(player, args)
-  if getIsGameStarted() then
+  if getIsGameStarted() and player.alive then
     sendSystemMessage(player.source, 'You can\'t save your skin during the match')
   else
     TriggerEvent('brv:saveSkin', player.source)
