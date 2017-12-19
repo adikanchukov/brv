@@ -76,10 +76,12 @@ end)
 
 
 Citizen.CreateThread(function()
-  local message = ''
+  local message
 
   while true do
     Wait(0)
+
+    message = nil
 
     if getIsGameStarted() then
       message = 'Alive players:  ~o~' .. getPlayersRemaining()
@@ -87,13 +89,9 @@ Citizen.CreateThread(function()
       message = getPlayersRemainingToAutostart()..' player(s) left to autostart the match.'
     end
 
-    if isPlayerInLobby() and not isPlayerInSpectatorMode() then
-      if getIsGameStarted() then
-        message = 'The match is currently going.\nUse TV to spectate players.'
-      end
+    if message then
+      showHelp(message)
     end
-
-    showHelp(message)
 
     DisplayRadar(not isPlayerInSpectatorMode() and not isPlayerInLobby())
   end

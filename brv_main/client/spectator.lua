@@ -101,6 +101,10 @@ Citizen.CreateThread(function()
         end
       else
         inTVZone = false
+
+        if not spectatorMode then
+          showHelp('The match is currently going.\nUse TV to spectate players.')
+        end
       end
 
       -- Player is near the TV and pressed "F"
