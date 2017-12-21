@@ -6,7 +6,6 @@
 --------------------------------------------------------------------------------
 --                                 Variables                                  --
 --------------------------------------------------------------------------------
-local firstSpawn = true -- Used to trigger a first spawn event to the server and loads the player from DB
 local nbPlayersRemaining = 0 -- Printed top left
 local autostartPlayersRemaining = -1 -- Players remaining to start the Battle
 local alivePlayers = {} -- A table with all alive players, during a game
@@ -118,20 +117,15 @@ AddEventHandler('onClientMapStart', function()
 end)
 
 AddEventHandler('playerSpawned', function()
-  local playerId = PlayerId()
-  local ped = GetPlayerPed(playerId)
 
   -- Disable PVP
-  SetCanAttackFriendly(ped, false, false)
+  SetCanAttackFriendly(PlayerPedId(), false, false)
   NetworkSetFriendlyFireOption(false)
-  -- SetEntityCanBeDamaged(ped, false)
-
-  if firstSpawn then
-    firstSpawn = false
-    TriggerServerEvent('brv:playerFirstSpawned')
-  end
+  -- SetEntityCanBeDamaged(PlayerPedId(), false)
 
   playerInLobby = true
+
+  TriggerServerEvent('brv:playerSpawned')
 end)
 
 -- Updates the current number of alive (remaining) players

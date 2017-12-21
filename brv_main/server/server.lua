@@ -19,7 +19,7 @@ local sqlDateFormat = '%Y-%m-%d %H:%M:%S'
 --                                  Events                                    --
 --------------------------------------------------------------------------------
 
-RegisterServerEvent('brv:playerFirstSpawned')
+RegisterServerEvent('brv:playerSpawned')
 RegisterServerEvent('brv:saveCoords')
 RegisterServerEvent('brv:dropPlayer')
 RegisterServerEvent('brv:playerLoaded')
@@ -201,11 +201,11 @@ Citizen.CreateThread(function()
   math.randomseed(os.time())
 end)
 
--- "First" spawn
--- Is actually triggered every resource restart, because of gametype
-AddEventHandler('brv:playerFirstSpawned', function()
-  print('brv:playerFirstSpawned : ' .. source)
-  loadPlayer(source)
+
+AddEventHandler('brv:playerSpawned', function()
+  if not players[source] then
+    loadPlayer(source)
+  end
 end)
 
 AddEventHandler('brv:saveCoords', function(coords)
