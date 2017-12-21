@@ -339,19 +339,10 @@ AddEventHandler('brv:startGame', function()
   -- Reverse safe zones
   safeZonesCoords = table_reverse(safeZonesCoords)
 
-  -- Sets all players alive, and init some other variables
-  nbAlivePlayers = count(getPlayers())
-  for i, player in pairs(players) do
-    player.alive = true
-    player.rank = 0
-    player.kills = 0
-    player.spawn = {}
-    player.weapon = ''
-    player.voted = false
-  end
-
   -- Insert data in DB
   safeZonesJSON = json.encode(safeZonesCoords)
+
+  nbAlivePlayers = count(getPlayers())
 
   MySQL.Async.execute('INSERT INTO games (safezones, created) VALUES (@safezones, @created)', {['@safezones'] = safeZonesJSON, ['@created'] = os.date(sqlDateFormat)}, function()
     MySQL.Async.fetchScalar('SELECT MAX(id) FROM games', { }, function(id) --TODO Ugly stuff
@@ -418,6 +409,16 @@ AddEventHandler('brv:stopGame', function(restart, noWin)
       TriggerClientEvent('brv:stopGame', -1, winner.name, restart)
     end
   end)
+
+  -- Reset player stats
+  for _, player in pairs(players) do
+    player.alive = true
+    player.rank = 0
+    player.kills = 0
+    player.spawn = {}
+    player.weapon = ''
+    player.voted = false
+  end
 end)
 
 AddEventHandler('brv:stopGameClients', function(name, restart)
