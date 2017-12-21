@@ -259,7 +259,7 @@ AddEventHandler('brv:playerLoaded', function(source, player)
     if nbPlayers == conf.autostart then
       TriggerClientEvent('brv:restartGame', -1)
     else
-        TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, math.max(conf.autostart - nbPlayers, 0))
+      TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, math.max(conf.autostart - nbPlayers, 0))
     end
   else
     updateAlivePlayers(source)
@@ -340,7 +340,7 @@ AddEventHandler('brv:startGame', function()
   safeZonesCoords = table_reverse(safeZonesCoords)
 
   -- Sets all players alive, and init some other variables
-  nbAlivePlayers = count(players)
+  nbAlivePlayers = count(getPlayers())
   for i, player in pairs(players) do
     player.alive = true
     player.rank = 0
@@ -383,7 +383,9 @@ end)
 -- Stops the game
 AddEventHandler('brv:stopGame', function(restart, noWin)
   -- Disable autorestart if nb players < autostart
-  if count(players) < conf.autostart then restart = false end
+  local nbPlayers = count(getPlayers())
+  TriggerClientEvent('brv:updateRemainingToStartPlayers', -1, math.max(conf.autostart - nbPlayers, 0))
+  if nbPlayers < conf.autostart then restart = false end
 
   if not isGameStarted then
     TriggerClientEvent('brv:stopGame', -1, nil, restart)
@@ -448,7 +450,7 @@ AddEventHandler('brv:playerDied', function(source, killer, suicide)
 
   sendNotification(-1, message)
 
-  if not conf.debug and isGameStarted and nbAlivePlayers == 1 and count(players) > 1 then
+  if not conf.debug and isGameStarted and nbAlivePlayers == 1 and count(getPlayers()) > 1 then
     TriggerEvent('brv:stopGame', true, false)
   end
 end)
