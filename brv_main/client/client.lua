@@ -348,8 +348,8 @@ AddEventHandler('brv:nextSafeZone', function()
         TriggerEvent('brv:nextSafeZone')
       end)
     end
-  else
-    RemoveBlip(safeZoneBlip[currentSafeZone - 2])
+  elseif isGameStarted then
+    RemoveBlip(safeZoneBlips[currentSafeZone - 2])
   end
 end)
 
