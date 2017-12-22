@@ -162,7 +162,7 @@ Citizen.CreateThread(function()
             },
             {
               button = '~INPUT_FRONTEND_LEFT~',
-              label = 'Previous player'
+              label = 'Previous Player'
             },
           })
           showText('You are in Spectator Mode.', 0.5, 0.95, conf.color.white, 0, 0.5, true, true)
