@@ -83,9 +83,9 @@ Citizen.CreateThread(function()
 
     message = nil
 
-    if getIsGameStarted() then
+    if (getIsGameStarted() and not isPlayerInLobby()) or (getIsGameStarted() and isPlayerInLobby() and isPlayerInSpectatorMode()) then
       message = 'Alive players:  ~o~' .. getPlayersRemaining()
-    elseif not getIsGameEnded() then
+    elseif not getIsGameEnded() and not getIsGameStarted() and isPlayerInLobby() then
       message = getPlayersRemainingToAutostart()..' player(s) left to autostart the match.'
     end
 
