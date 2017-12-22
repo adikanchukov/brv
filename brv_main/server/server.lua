@@ -11,7 +11,6 @@ local players = {}
 local safeZonesCoords = {}
 local isGameStarted = false
 local nbAlivePlayers = 0
-local pickupsSpawned = false
 local gameId = 0
 local sqlDateFormat = '%Y-%m-%d %H:%M:%S'
 
